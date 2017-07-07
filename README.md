@@ -10,9 +10,9 @@ It is also an assessed project, hence some of the functionality (& certainly the
 this [project specification](https://review.udacity.com/#!/rubrics/17/view)
 
 # Getting Started
-1 - Go to https://aqueum.github.io/UFS-NeighborhoodMap/
-2 - Hopefully the app will be self explanatory
-3 - If you don't see a map the chances are there is a google API key issue,
+1. Go to https://aqueum.github.io/UFS-NeighborhoodMap/
+2. Hopefully the app will be self explanatory
+3. If you don't see a map the chances are there is a google API key issue,
 please [contact me](http://www.aqueum.com/contact/)
 
 # Known issues
