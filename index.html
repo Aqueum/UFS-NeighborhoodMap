@@ -8,7 +8,11 @@
 </head>
 <body>
     <h1>Find a place to sleep</h1>
-    <p>coming soon...</p>
+
+    <div data-bind="foreach: shelterlist">
+        <div data-bind="text: title"></div>
+    </div>
+
     <script src="js/lib/knockout-3.4.2.js"></script>
     <script src="js/app.js"></script>
 </body>
