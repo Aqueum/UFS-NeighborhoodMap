@@ -1,2 +1,6 @@
 # Affinity Design Documents
 *.afdesign
+
+# Random files
+.DS_Store
+.idea/
