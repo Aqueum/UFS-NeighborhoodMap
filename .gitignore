@@ -1,6 +1,10 @@
 # Affinity Design Documents
 *.afdesign
 
+# Security files
+config_settings.json
+background/
+
 # Random files
 .DS_Store
 .idea/
