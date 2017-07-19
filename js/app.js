@@ -52,26 +52,6 @@ var ViewModel = function() {
         self.shelterlist.push( new Shelter(shelter));
     });
 
-    var map;
-    function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 55.953252, lng: -3.188267},
-            zoom: 13,
-            mapTypeControl: false
-        });
-    }
-
-    var MapsAPI = function () {
-        var Loader = document.createElement('script');
-        Loader.type = "text/javascript";
-        Loader.src = "https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyDzgsCnF1p3JHZX-bdZHoJv_2ZU-0CjCHQ&v=3&callback=initMap";
-        Loader.async;
-        Loader.defer;
-        document.getElementsByTagName('head')[0].appendChild(Loader);
-    };
-
-    MapsAPI();
-
 };
 
 ko.applyBindings(new ViewModel());

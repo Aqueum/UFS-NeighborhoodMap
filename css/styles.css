@@ -10,11 +10,12 @@ nav a, button {
 
 /* Text */
 * {
-    font: 100%/1.2 "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font: 100%/1.2 "Verdana", "Helvetica", "Arial", sans-serif;
     color: #237;
 }
 
 h1 {
+    font: 100%/1.2 "Verdana", sans-serif;
     font-size: 3em;
     margin-bottom: 0.5em;
     color: #459;
@@ -49,4 +50,25 @@ html, body {
 
 #map {
     height: 100%;
+}
+
+#box {
+    position: absolute;
+    top: 78px;
+    left: 20px;
+    z-index: 99; /* https://stackoverflow.com/questions/6037712/how-to-float-a-div-over-google-maps */
+    background-color: #fff;
+    opacity: 0.8;
+    filter: alpha(opacity=80); /* For IE8 and earlier (https://www.w3schools.com/css/tryit.asp?filename=trycss_transparency)*/
+}
+
+#title {
+    position: absolute;
+    top: 0px;
+    left: 25px;
+    z-index: 99; /* https://stackoverflow.com/questions/6037712/how-to-float-a-div-over-google-maps */
+}
+
+.gmnoprint {
+
 }
