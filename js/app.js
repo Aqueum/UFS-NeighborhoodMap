@@ -6,33 +6,41 @@ var shelters = [{
         title: 'Bethany House',
         location: {lat: 55.976019, lng: -3.176873},
         wiki: 'https://en.wikipedia.org/wiki/Bethany_Christian_Trust#Emergency_accommodation_-_Bethany_House',
-        url: 'http://www.bethanychristiantrust.com/services/emergency-resettlement/'
+        url: 'http://www.bethanychristiantrust.com/services/emergency-resettlement/',
+        twitter: '@_BethanyCT'
     },{
         title: 'The Pleasance Lifehouse',
         location: {lat: 55.949095, lng: -3.183409},
         wiki: 'https://en.wikipedia.org/wiki/The_Salvation_Army',
-        url: 'https://www.salvationarmy.org.uk/pleasance-lifehouse'
+        url: 'https://www.salvationarmy.org.uk/pleasance-lifehouse',
+        twitter: '@salvationarmyuk'
     },{
         title: 'Access Point',
         location: {lat: 55.95411, lng: -3.187813},
         wiki: 'https://en.wikipedia.org/wiki/Politics_of_Edinburgh#The_City_of_Edinburgh_Council',
-        url: 'https://www.edinburgh.gov.uk/site/scripts/home_info.php?homepageID=60&recordID=5290'
+        url: 'https://www.edinburgh.gov.uk/site/scripts/home_info.php?homepageID=60&recordID=5290',
+        twitter: '@Edinburgh_CC ‏'
     },{
         title: 'Homeless Action Scotland',
         location: {lat: 55.94488, lng: -3.227132},
         wiki: '',
-        url: 'https://www.homelessactionscotland.org.uk/'
+        url: 'https://www.homelessactionscotland.org.uk/',
+        twitter: '@1HomelessAction'
     },{
         title: 'Gowrie Care - Tollcross View',
         location: {lat: 55.944497, lng: -3.200479},
         wiki: '',
-        url: 'https://hillcrest.org.uk/Gowrie+Care/'
+        url: 'https://hillcrest.org.uk/Gowrie+Care/',
+        twitter: '@Hillcrest_Group'
     }
 ];
 
 var Shelter = function(data) {
     this.title = ko.observable(data.title);
     this.location = ko.observable(data.location);
+    this.wiki = ko.observable(data.wiki);
+    this.url = ko.observable(data.url);
+    this.twitter = ko.observable(data.twitter);
 };
 
 var ViewModel = function() {
@@ -43,6 +51,26 @@ var ViewModel = function() {
     shelters.forEach(function(shelter){
         self.shelterlist.push( new Shelter(shelter));
     });
+
+    var map;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 55.953252, lng: -3.188267},
+            zoom: 13,
+            mapTypeControl: false
+        });
+    }
+
+    var MapsAPI = function () {
+        var Loader = document.createElement('script');
+        Loader.type = "text/javascript";
+        Loader.src = "https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyDzgsCnF1p3JHZX-bdZHoJv_2ZU-0CjCHQ&v=3&callback=initMap";
+        Loader.async;
+        Loader.defer;
+        document.getElementsByTagName('head')[0].appendChild(Loader);
+    };
+
+    MapsAPI();
 
 };
 
