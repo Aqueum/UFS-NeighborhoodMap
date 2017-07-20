@@ -362,12 +362,20 @@ function initMap() {
             position: google.maps.ControlPosition.LEFT_BOTTOM
         }
     });
-    var tribeca = {lat: 55.976019, lng: -3.176873};
-    var marker = new google.maps.Marker({
-        position: tribeca,
-        map: map,
-        title: 'First Marker!'
-    });
+    shelters.forEach(function(shelter){
+        var marker = new google.maps.Marker({
+            position: shelter.location,
+            map: map,
+            title: shelter.title,
+            icon: {
+                path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                scale: 5,
+                strokeWeight:3,
+                strokeColor:"#F07"
+            },
+        });
+    })
+
 }
 
 ko.applyBindings(new ViewModel());
