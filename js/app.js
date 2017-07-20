@@ -5,33 +5,107 @@
 var shelters = [{
         title: 'Bethany House',
         location: {lat: 55.976019, lng: -3.176873},
+        address: '12 Couper Street',
+        phone: '0131 561 8911',
         wiki: 'https://en.wikipedia.org/wiki/Bethany_Christian_Trust#Emergency_accommodation_-_Bethany_House',
         url: 'http://www.bethanychristiantrust.com/services/emergency-resettlement/',
-        twitter: '@_BethanyCT'
+        twitter: '@_BethanyCT',
+        males: 1,
+        females: 1,
+        minAge: 16,
+        maxAge: 999,
+        pets: 0
     },{
         title: 'The Pleasance Lifehouse',
         location: {lat: 55.949095, lng: -3.183409},
+        address: '1 The Pleasance',
+        phone: '0131 556 9674',
         wiki: 'https://en.wikipedia.org/wiki/The_Salvation_Army',
         url: 'https://www.salvationarmy.org.uk/pleasance-lifehouse',
-        twitter: '@salvationarmyuk'
+        twitter: '@salvationarmyuk',
+        males: 1,
+        females: 0,
+        minAge: 18,
+        maxAge: 70,
+        pets: 0
     },{
-        title: 'Access Point',
-        location: {lat: 55.95411, lng: -3.187813},
-        wiki: 'https://en.wikipedia.org/wiki/Politics_of_Edinburgh#The_City_of_Edinburgh_Council',
-        url: 'https://www.edinburgh.gov.uk/site/scripts/home_info.php?homepageID=60&recordID=5290',
-        twitter: '@Edinburgh_CC ‏'
-    },{
-        title: 'Homeless Action Scotland',
-        location: {lat: 55.94488, lng: -3.227132},
+        title: 'Castlecliff',
+        location: {lat: 55.948042, lng: -3.197942},
+        address: '25 Johnston Terrace',
+        phone: '0131 225 1643',
         wiki: '',
-        url: 'https://www.homelessactionscotland.org.uk/',
-        twitter: '@1HomelessAction'
+        url: '',
+        twitter: '',
+        males: 1,
+        females: 1,
+        minAge: 16,
+        maxAge: 999,
+        pets: 0
     },{
-        title: 'Gowrie Care - Tollcross View',
-        location: {lat: 55.944497, lng: -3.200479},
+        title: 'Cranston Street',
+        location: {lat: 55.950814, lng: -3.184032},
+        address: '2 Cranston Street',
+        phone: '0131 556 8939',
         wiki: '',
-        url: 'https://hillcrest.org.uk/Gowrie+Care/',
-        twitter: '@Hillcrest_Group'
+        url: '',
+        twitter: '',
+        males: 0,
+        females: 1,
+        minAge: 18,
+        maxAge: 999,
+        pets: 0
+    },{
+        title: 'Cunningham House',
+        location: {lat: 55.948521, lng: -3.188035},
+        address: '205 Cowgate',
+        phone: '0131 225 4795',
+        wiki: '',
+        url: '',
+        twitter: '',
+        males: 1,
+        females: 1,
+        minAge: 18,
+        maxAge: 999,
+        pets: 0
+    },{
+        title: 'Dunedin Harbour',
+        location: {lat: 55.974320, lng: -3.172797},
+        address: '4 Parliament Street',
+        phone: '0131 624 5800',
+        wiki: '',
+        url: '',
+        twitter: '',
+        males: 1,
+        females: 1,
+        minAge: 16,
+        maxAge: 999,
+        pets: 1
+    },{
+        title: 'Number Twenty',
+        location: {lat: 55.958834, lng: -3.188510},
+        address: '20 Broughton Place',
+        phone: '0131 557 1739',
+        wiki: '',
+        url: '',
+        twitter: '',
+        males: 0,
+        females: 1,
+        minAge: 16,
+        maxAge: 21,
+        pets: 0
+    },{
+        title: 'Stopover',
+        location: {lat: 55.944195, lng: -3.211942},
+        address: '40 Grove Street',
+        phone: '0131 229 6907',
+        wiki: '',
+        url: '',
+        twitter: '',
+        males: 1,
+        females: 1,
+        minAge: 16,
+        maxAge: 21,
+        pets: 0
     }
 ];
 
@@ -362,12 +436,20 @@ function initMap() {
             position: google.maps.ControlPosition.LEFT_BOTTOM
         }
     });
-    var tribeca = {lat: 55.976019, lng: -3.176873};
-    var marker = new google.maps.Marker({
-        position: tribeca,
-        map: map,
-        title: 'First Marker!'
-    });
+    shelters.forEach(function(shelter){
+        var marker = new google.maps.Marker({
+            position: shelter.location,
+            map: map,
+            title: shelter.title,
+            icon: {
+                path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,  // https://www.tutorialspoint.com/google_maps/google_maps_symbols.htm
+                scale: 5,
+                strokeWeight:3,
+                strokeColor:"#F07"
+            },
+        });
+    })
+
 }
 
 ko.applyBindings(new ViewModel());
