@@ -2,11 +2,13 @@
  * Created by Martin Currie (https://github.com/Aqueum) on 07/07/2017.
  */
 
-var shelters = [{
+var shelters = [
+    {
         title: 'Bethany House',
         location: {lat: 55.976019, lng: -3.176873},
         address: '12 Couper Street',
         phone: '0131 561 8911',
+        email: 'info@bethanychristiantrust.com',
         wiki: 'https://en.wikipedia.org/wiki/Bethany_Christian_Trust#Emergency_accommodation_-_Bethany_House',
         url: 'http://www.bethanychristiantrust.com/services/emergency-resettlement/',
         twitter: '@_BethanyCT',
@@ -20,6 +22,7 @@ var shelters = [{
         location: {lat: 55.949095, lng: -3.183409},
         address: '1 The Pleasance',
         phone: '0131 556 9674',
+        email: 'eastscotland@salvationarmy.org.uk',
         wiki: 'https://en.wikipedia.org/wiki/The_Salvation_Army',
         url: 'https://www.salvationarmy.org.uk/pleasance-lifehouse',
         twitter: '@salvationarmyuk',
@@ -33,21 +36,23 @@ var shelters = [{
         location: {lat: 55.948042, lng: -3.197942},
         address: '25 Johnston Terrace',
         phone: '0131 225 1643',
-        wiki: '',
-        url: '',
-        twitter: '',
+        email: 'castlecliff@edinburgh.gov.uk',
+        wiki: 'https://en.wikipedia.org/wiki/Politics_of_Edinburgh#Council_and_committees',
+        url: 'https://www.edinburgh.gov.uk/directory_record/20741/castlecliff',
+        twitter: '@Edinburgh_CC',
         males: 1,
         females: 1,
         minAge: 16,
         maxAge: 999,
-        pets: 0
+        pets: 1
     },{
-        title: 'Cranston Street',
+        title: 'Keymoves',
         location: {lat: 55.950814, lng: -3.184032},
         address: '2 Cranston Street',
         phone: '0131 556 8939',
+        email: 'info@keymoves.org.uk',
         wiki: '',
-        url: '',
+        url: 'http://www.keymoves.org.uk/',
         twitter: '',
         males: 0,
         females: 1,
@@ -59,22 +64,24 @@ var shelters = [{
         location: {lat: 55.948521, lng: -3.188035},
         address: '205 Cowgate',
         phone: '0131 225 4795',
-        wiki: '',
-        url: '',
-        twitter: '',
+        email: 'info@crossreach.org.uk',
+        wiki: 'https://en.wikipedia.org/wiki/Church_of_Scotland#Councils',
+        url: 'http://www.crossreach.org.uk/cunningham-house',
+        twitter: '@CrossReach',
         males: 1,
         females: 1,
         minAge: 18,
-        maxAge: 999,
+        maxAge: 65,
         pets: 0
     },{
         title: 'Dunedin Harbour',
         location: {lat: 55.974320, lng: -3.172797},
         address: '4 Parliament Street',
         phone: '0131 624 5800',
+        email: 'hostel@dunedincanmore.org.uk',
         wiki: '',
-        url: '',
-        twitter: '',
+        url: 'https://www.dunedincanmore.org.uk/2/dunedin-harbour',
+        twitter: '@DunedinCanmore',
         males: 1,
         females: 1,
         minAge: 16,
@@ -85,9 +92,10 @@ var shelters = [{
         location: {lat: 55.958834, lng: -3.188510},
         address: '20 Broughton Place',
         phone: '0131 557 1739',
+        email: 'lindam@foursquare.org.uk',
         wiki: '',
-        url: '',
-        twitter: '',
+        url: 'http://www.foursquare.org.uk/our-services/accommodation-and-support/number-20/',
+        twitter: '@FourSquareEdin',
         males: 0,
         females: 1,
         minAge: 16,
@@ -98,8 +106,9 @@ var shelters = [{
         location: {lat: 55.944195, lng: -3.211942},
         address: '40 Grove Street',
         phone: '0131 229 6907',
-        wiki: '',
-        url: '',
+        email: 'lindam@foursquare.org.uk',
+        wiki: '@FourSquareEdin',
+        url: 'http://www.foursquare.org.uk/our-services/accommodation-and-support/stopover/',
         twitter: '',
         males: 1,
         females: 1,
@@ -112,9 +121,17 @@ var shelters = [{
 var Shelter = function(data) {
     this.title = ko.observable(data.title);
     this.location = ko.observable(data.location);
+    this.address = ko.observable(data.address);
+    this.phone = ko.observable(data.phone);
+    this.email = ko.observable(data.email);
     this.wiki = ko.observable(data.wiki);
     this.url = ko.observable(data.url);
     this.twitter = ko.observable(data.twitter);
+    this.males = ko.observable(data.males);
+    this.females = ko.observable(data.females);
+    this.minAge = ko.observable(data.minAge);
+    this.maxAge = ko.observable(data.maxAge);
+    this.pets = ko.observable(data.pets);
 };
 
 var ViewModel = function() {
