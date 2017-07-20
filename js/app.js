@@ -2,22 +2,6 @@
  * Created by Martin Currie (https://github.com/Aqueum) on 07/07/2017.
  */
 
-var products = [
-    {
-        name: 'prod1',
-        genre: 'True'
-    },{
-        name: 'prod2',
-        genre: 'False'
-    },{
-        name: 'prod3',
-        genre: 'False'
-    },{
-        name: 'prod4',
-        genre: 'True'
-    }
-];
-
 var shelters = [
     {
         title: 'Bethany House',
@@ -134,11 +118,6 @@ var shelters = [
     }
 ];
 
-var Product = function(data) {
-    this.name = data.name;
-    this.genre = data.genre;
-};
-
 var Shelter = function(data) {
     this.title = data.title;
     this.location = data.location;
@@ -158,54 +137,61 @@ var Shelter = function(data) {
 var ViewModel = function() {
     var self = this;
 
-    self.productlist = ko.observableArray([]);
-
     self.shelterlist = ko.observableArray([]);
-
-    self.currentFilter = ko.observable(); // property to store the filter
-
-    products.forEach(function(thing){
-        self.productlist.push( new Product(thing));
-    });
 
     shelters.forEach(function(thing){
         self.shelterlist.push( new Shelter(thing));
     });
 
+    self.maleFilter = ko.observable(); // property to store the filter
+    // self.femaleFilter = ko.observable(); // property to store the filter
+    // self.petFilter = ko.observable(); // property to store the filter
+    // self.showAll = ko.observable(); // property to store the filter
+
     self.filterShelters = ko.computed(function () {
-       if(!self.currentFilter()) {
+       if(!self.maleFilter()) {
            return self.shelterlist();
        } else {
            return ko.utils.arrayFilter(self.shelterlist(), function(prod) {
-               return prod.females === self.currentFilter();
+               return prod.males === self.maleFilter();
            });
        }
     });
 
-    self.filterProducts = ko.computed(function () {
-        if (!self.currentFilter()) {
-            return self.productlist();
-        } else {
-            return ko.utils.arrayFilter(self.productlist(), function (prod) {
-                return prod.genre === self.currentFilter();
-            });
-        }
-    });
-
-    self.filterShelters = ko.computed(function () {
-        if (!self.currentFilter()) {
-            return self.shelterlist();
-        } else {
-            return ko.utils.arrayFilter(self.shelterlist(), function (prod) {
-                return prod.males === self.currentFilter();
-            });
-        }
-    });
-
-    self.filter = function (answer) {
-        self.currentFilter(answer);
+    self.takeMales = function (answer) {
+        self.maleFilter(answer);
     };
 
+
+
+    // self.takeFemales = function (answer) {
+    //     self.femaleFilter(answer);
+    // };
+    //
+    // self.takePets = function (answer) {
+    //     self.petFilter(answer);
+    // };
+    //
+    // self.resetAll = function () {
+    //     self.showAll('True');
+    // };
+
+    // var filterSet = ko.observableArray([
+    //     self.maleFilter()
+    // ]);
+    //
+    // self.filterShelters = ko.computed(function() {
+    //     var currentList = self.shelterList();
+    //     var currentFilters = self.filterSet();
+    //
+    //     ko.utils.arrayForEach(currentFilters, function () {
+    //         currentList = ko.utils.arrayFilter(currentList, function(filter) {
+    //             return app.utils.inArray(filter, currentFilters);
+    //         });
+    //     });
+    //
+    //     return currentList;
+    // });
 
 };
 

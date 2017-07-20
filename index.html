@@ -14,18 +14,13 @@
     <div data-bind="foreach: filterShelters">
         <div class="row">
             <div class="col-md-2" data-bind="text: title"></div>
-            <div class="col-md-2" data-bind="text: email"></div>
         </div>
     </div>
-    <div data-bind="foreach: filterProducts">
-        <div class="row">
-            <div class="col-md-2" data-bind="text: name"></div>
-            <div class="col-md-2" data-bind="text: genre"></div>
-        </div>
-    </div>
-    <button data-bind="click: function() { filter('True') }">True</button>
-    <button data-bind="click: function() { filter('False') }">False</button>
-    <button data-bind="click: function() { filter() }">Unfilter</button>
+    <button data-bind="click: function() { takeMales('True') }">Men</button>
+    <button data-bind="click: function() { takeMales() }">Reset</button>
+    <!--<button data-bind="click: function() { takeFemales('True') }">Women</button>-->
+    <!--<button data-bind="click: function() { takePets('True') }">Pets</button>-->
+    <!--<button data-bind="click: function() { resetAll() }" >All</button>-->
 </div>
 <div id="title">
     <h1>HomePointr</h1>
