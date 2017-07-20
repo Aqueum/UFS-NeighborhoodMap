@@ -18,7 +18,7 @@ var shelters = [
         maxAge: 999,
         pets: 0
     },{
-        title: 'The Pleasance Lifehouse',
+        title: 'Pleasance Lifehouse',
         location: {lat: 55.949095, lng: -3.183409},
         address: '1 The Pleasance',
         phone: '0131 556 9674',
@@ -462,7 +462,7 @@ function initMap() {
                 path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,  // https://www.tutorialspoint.com/google_maps/google_maps_symbols.htm
                 scale: 5,
                 strokeWeight:3,
-                strokeColor:"#F07"
+                strokeColor:"#ea3323"
             },
         });
     })
