@@ -9,13 +9,30 @@
 </head>
 <body>
 <div id="map"></div>
-<div id="box" data-bind="foreach: shelterlist">
-    <div data-bind="text: title"></div>
+<div id="box">
+    <p></p>
+    <div data-bind="foreach: filterShelters">
+        <div class="row">
+            <div class="col-md-2" data-bind="text: title"></div>
+            <div class="col-md-2" data-bind="text: email"></div>
+        </div>
+    </div>
+    <div data-bind="foreach: filterProducts">
+        <div class="row">
+            <div class="col-md-2" data-bind="text: name"></div>
+            <div class="col-md-2" data-bind="text: genre"></div>
+        </div>
+    </div>
+    <button data-bind="click: function() { filter('True') }">True</button>
+    <button data-bind="click: function() { filter('False') }">False</button>
+    <button data-bind="click: function() { filter() }">Unfilter</button>
 </div>
 <div id="title">
     <h1>HomePointr</h1>
 </div>
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+
+
 <script src="js/lib/knockout-3.4.2.js"></script>
 <script src="js/app.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyCUqFBJkQPW0zQHlQr62QJsd8I1ni1DXTY&v=3&callback=initMap"

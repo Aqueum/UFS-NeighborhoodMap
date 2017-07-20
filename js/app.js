@@ -2,6 +2,22 @@
  * Created by Martin Currie (https://github.com/Aqueum) on 07/07/2017.
  */
 
+var products = [
+    {
+        name: 'prod1',
+        genre: 'True'
+    },{
+        name: 'prod2',
+        genre: 'False'
+    },{
+        name: 'prod3',
+        genre: 'False'
+    },{
+        name: 'prod4',
+        genre: 'True'
+    }
+];
+
 var shelters = [
     {
         title: 'Bethany House',
@@ -12,11 +28,11 @@ var shelters = [
         wiki: 'https://en.wikipedia.org/wiki/Bethany_Christian_Trust#Emergency_accommodation_-_Bethany_House',
         url: 'http://www.bethanychristiantrust.com/services/emergency-resettlement/',
         twitter: '@_BethanyCT',
-        males: 1,
-        females: 1,
+        males: 'True',
+        females: 'True',
         minAge: 16,
         maxAge: 999,
-        pets: 0
+        pets: 'False'
     },{
         title: 'Pleasance Lifehouse',
         location: {lat: 55.949095, lng: -3.183409},
@@ -26,11 +42,11 @@ var shelters = [
         wiki: 'https://en.wikipedia.org/wiki/The_Salvation_Army',
         url: 'https://www.salvationarmy.org.uk/pleasance-lifehouse',
         twitter: '@salvationarmyuk',
-        males: 1,
-        females: 0,
+        males: 'True',
+        females: 'False',
         minAge: 18,
         maxAge: 70,
-        pets: 0
+        pets: 'False'
     },{
         title: 'Castlecliff',
         location: {lat: 55.948042, lng: -3.197942},
@@ -40,11 +56,11 @@ var shelters = [
         wiki: 'https://en.wikipedia.org/wiki/Politics_of_Edinburgh#Council_and_committees',
         url: 'https://www.edinburgh.gov.uk/directory_record/20741/castlecliff',
         twitter: '@Edinburgh_CC',
-        males: 1,
-        females: 1,
+        males: 'True',
+        females: 'True',
         minAge: 16,
         maxAge: 999,
-        pets: 1
+        pets: 'True'
     },{
         title: 'Keymoves',
         location: {lat: 55.950814, lng: -3.184032},
@@ -54,11 +70,11 @@ var shelters = [
         wiki: '',
         url: 'http://www.keymoves.org.uk/',
         twitter: '',
-        males: 0,
-        females: 1,
+        males: 'False',
+        females: 'True',
         minAge: 18,
         maxAge: 999,
-        pets: 0
+        pets: 'False'
     },{
         title: 'Cunningham House',
         location: {lat: 55.948521, lng: -3.188035},
@@ -68,11 +84,11 @@ var shelters = [
         wiki: 'https://en.wikipedia.org/wiki/Church_of_Scotland#Councils',
         url: 'http://www.crossreach.org.uk/cunningham-house',
         twitter: '@CrossReach',
-        males: 1,
-        females: 1,
+        males: 'True',
+        females: 'True',
         minAge: 18,
         maxAge: 65,
-        pets: 0
+        pets: 'False'
     },{
         title: 'Dunedin Harbour',
         location: {lat: 55.974320, lng: -3.172797},
@@ -82,11 +98,11 @@ var shelters = [
         wiki: '',
         url: 'https://www.dunedincanmore.org.uk/2/dunedin-harbour',
         twitter: '@DunedinCanmore',
-        males: 1,
-        females: 1,
+        males: 'True',
+        females: 'True',
         minAge: 16,
         maxAge: 999,
-        pets: 1
+        pets: 'True'
     },{
         title: 'Number Twenty',
         location: {lat: 55.958834, lng: -3.188510},
@@ -96,11 +112,11 @@ var shelters = [
         wiki: '',
         url: 'http://www.foursquare.org.uk/our-services/accommodation-and-support/number-20/',
         twitter: '@FourSquareEdin',
-        males: 0,
-        females: 1,
+        males: 'False',
+        females: 'True',
         minAge: 16,
         maxAge: 21,
-        pets: 0
+        pets: 'False'
     },{
         title: 'Stopover',
         location: {lat: 55.944195, lng: -3.211942},
@@ -110,41 +126,90 @@ var shelters = [
         wiki: '@FourSquareEdin',
         url: 'http://www.foursquare.org.uk/our-services/accommodation-and-support/stopover/',
         twitter: '',
-        males: 1,
-        females: 1,
+        males: 'True',
+        females: 'True',
         minAge: 16,
         maxAge: 21,
-        pets: 0
+        pets: 'False'
     }
 ];
 
+var Product = function(data) {
+    this.name = data.name;
+    this.genre = data.genre;
+};
+
 var Shelter = function(data) {
-    this.title = ko.observable(data.title);
-    this.location = ko.observable(data.location);
-    this.address = ko.observable(data.address);
-    this.phone = ko.observable(data.phone);
-    this.email = ko.observable(data.email);
-    this.wiki = ko.observable(data.wiki);
-    this.url = ko.observable(data.url);
-    this.twitter = ko.observable(data.twitter);
-    this.males = ko.observable(data.males);
-    this.females = ko.observable(data.females);
-    this.minAge = ko.observable(data.minAge);
-    this.maxAge = ko.observable(data.maxAge);
-    this.pets = ko.observable(data.pets);
+    this.title = data.title;
+    this.location = data.location;
+    this.address = data.address;
+    this.phone = data.phone;
+    this.email = data.email;
+    this.wiki = data.wiki;
+    this.url = data.url;
+    this.twitter = data.twitter;
+    this.males = data.males;
+    this.females = data.females;
+    this.minAge = data.minAge;
+    this.maxAge = data.maxAge;
+    this.pets = data.pets;
 };
 
 var ViewModel = function() {
     var self = this;
 
-    this.shelterlist = ko.observableArray([]);
+    self.productlist = ko.observableArray([]);
 
-    shelters.forEach(function(shelter){
-        self.shelterlist.push( new Shelter(shelter));
+    self.shelterlist = ko.observableArray([]);
+
+    self.currentFilter = ko.observable(); // property to store the filter
+
+    products.forEach(function(thing){
+        self.productlist.push( new Product(thing));
     });
+
+    shelters.forEach(function(thing){
+        self.shelterlist.push( new Shelter(thing));
+    });
+
+    self.filterShelters = ko.computed(function () {
+       if(!self.currentFilter()) {
+           return self.shelterlist();
+       } else {
+           return ko.utils.arrayFilter(self.shelterlist(), function(prod) {
+               return prod.females === self.currentFilter();
+           });
+       }
+    });
+
+    self.filterProducts = ko.computed(function () {
+        if (!self.currentFilter()) {
+            return self.productlist();
+        } else {
+            return ko.utils.arrayFilter(self.productlist(), function (prod) {
+                return prod.genre === self.currentFilter();
+            });
+        }
+    });
+
+    self.filterShelters = ko.computed(function () {
+        if (!self.currentFilter()) {
+            return self.shelterlist();
+        } else {
+            return ko.utils.arrayFilter(self.shelterlist(), function (prod) {
+                return prod.males === self.currentFilter();
+            });
+        }
+    });
+
+    self.filter = function (answer) {
+        self.currentFilter(answer);
+    };
+
+
 };
 
-function initMap() {
+var initMap = function() {
     var map = new google.maps.Map(document.getElementById('map'), {
         center: {lat:  55.953252, lng: -3.188267},
         zoom: 13,
@@ -463,10 +528,10 @@ function initMap() {
                 scale: 5,
                 strokeWeight:3,
                 strokeColor:"#ea3323"
-            },
+            }
         });
     })
 
-}
+};
 
 ko.applyBindings(new ViewModel());
