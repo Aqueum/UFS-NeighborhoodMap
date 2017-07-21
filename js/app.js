@@ -134,7 +134,7 @@ var Shelter = function(data) {
     this.pets = data.pets;
 };
 
-var ViewModel = function() {
+var viewModel = function() {
     var self = this;
 
     self.shelterlist = ko.observableArray([]);
@@ -188,7 +188,7 @@ var ViewModel = function() {
         }
     });
 
-    self.filterShelters = ko.computed(function () {
+    self.petShelters = ko.computed(function () {
         if(!self.petFilter()) {
             return self.femaleShelters();
         } else {
@@ -198,14 +198,22 @@ var ViewModel = function() {
         }
     });
 
+    self.filteredShelters = ko.computed(function () {
+        if(!self.age()) {
+            return self.petShelters();
+        } else {
+            return ko.utils.arrayFilter(self.petShelters(), function(hostel) {
+                return hostel.minAge <= self.age() && hostel.maxAge >= self.age();
+            });
+        }
+    });
 
-
-
+    // prior attempt at itterative filtering:
     // var filterSet = ko.observableArray([
     //     self.maleFilter()
     // ]);
     //
-    // self.filterShelters = ko.computed(function() {
+    // self.filteredShelters = ko.computed(function() {
     //     var currentList = self.shelterList();
     //     var currentFilters = self.filterSet();
     //
@@ -529,7 +537,10 @@ var initMap = function() {
             position: google.maps.ControlPosition.LEFT_BOTTOM
         }
     });
-    shelters.forEach(function(shelter){
+
+    // for (var x=0; x < viewModel.filteredShelters.length; x++) {
+    //     var self = viewModel.locations[x];
+    viewModel.filteredShelters.forEach(function(shelter){
         var marker = new google.maps.Marker({
             position: shelter.location,
             map: map,
@@ -542,7 +553,6 @@ var initMap = function() {
             }
         });
     })
-
 };
 
-ko.applyBindings(new ViewModel());
+ko.applyBindings(new viewModel());
