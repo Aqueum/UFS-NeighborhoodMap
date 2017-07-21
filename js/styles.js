@@ -1,5 +1,6 @@
 /**
  * Created by martin on 21/07/2017.
+ * created with https://snazzymaps.com/editor/edit-my-style/113338
  */
 
 var styles = [
@@ -300,4 +301,4 @@ var styles = [
             }
         ]
     }
-], // created with https://snazzymaps.com/editor/edit-my-style/113338
+]
