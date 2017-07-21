@@ -249,7 +249,8 @@ var viewModel = function() {
 
     self.showLabel = function(hostel) {
         console.log(hostel);
-        openInfoWindow(hostel);
+        // openInfoWindow(hostel);
+        // wikiData(hostel.title)
     }
 
     // prior attempt at itterative filtering:
@@ -664,6 +665,40 @@ function openInfoWindow(marker) {
     var Infowindow = new google.maps.InfoWindow();
     populateInfoWindow(marker, Infowindow);
 }
+
+// NEED TO DE-AJAX THIS
+// function wikiData(searchstring) {
+//
+//     var $wikiElem = $('#wikipedia-links');
+//
+//     // clear out old data before new request
+//     $wikiElem.text("");
+//
+//     var wikipediaEndPointUrl = "https://en.wikipedia.org/w/api.php";
+//     var wikiRequestTimeout = setTimeout(function(){ $wikiElem.text("failed to get wikipedia resources");}, 4000);
+//     $.ajax({
+//         url: wikipediaEndPointUrl,
+//         data: {
+//             "action": "opensearch",
+//             "search": searchstring,
+//             "format": "json",
+//         },
+//         dataType: "jsonp",
+//         success: function (response) {
+//             linkDisplays = response[1];
+//             links = response[3];
+//             var articles = [];
+//             for (var index = 0; index < response[1].length; index++) {
+//                 articles.push(
+//                     "<li><a href=" + '"' + links[index] + '"' + ">" + linkDisplays[index] + "</a></li>");
+//             }
+//             $wikiElem.append(articles);
+//             clearTimeout(wikiRequestTimeout);
+//         }
+//     });
+//
+//     return false;
+// };
 
 var vm = new viewModel();
 ko.applyBindings(vm);
