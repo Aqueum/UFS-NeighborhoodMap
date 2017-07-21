@@ -538,9 +538,15 @@ var initMap = function() {
         }
     });
 
+    // this gives a "Cannot read property 'forEach' of undefined" TypeError:
+    // viewModel.filteredShelters.forEach(function(shelter){
+    //
+    // this gives a "Cannot read property 'length' of undefined" TypeError:
     // for (var x=0; x < viewModel.filteredShelters.length; x++) {
     //     var self = viewModel.locations[x];
-    viewModel.filteredShelters.forEach(function(shelter){
+    //
+    // this works as expected, but that means plotting all shelters (unfiltered):
+    shelters.forEach(function(shelter){
         var marker = new google.maps.Marker({
             position: shelter.location,
             map: map,
