@@ -546,7 +546,7 @@ var initMap = function() {
     //     var self = viewModel.locations[x];
     //
     // this works as expected, but that means plotting all shelters (unfiltered):
-    shelters.forEach(function(shelter){
+    vm.filteredShelters().forEach(function(shelter){
         var marker = new google.maps.Marker({
             position: shelter.location,
             map: map,
@@ -561,4 +561,5 @@ var initMap = function() {
     })
 };
 
-ko.applyBindings(new viewModel());
+var vm = new viewModel();
+ko.applyBindings(vm);
