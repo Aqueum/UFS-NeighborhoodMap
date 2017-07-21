@@ -487,16 +487,18 @@ var initMap = function() {
 
     var normMarker = {
         path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,  // https://www.tutorialspoint.com/google_maps/google_maps_symbols.htm
-            scale: 5,
+        scale: 5,
         strokeWeight: 3,
         strokeColor: "#ea3323"
     };
 
-    var bigMarker = {
+    var boldMarker = {
         path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,  // https://www.tutorialspoint.com/google_maps/google_maps_symbols.htm
-        scale: 6,
-        strokeWeight: 4,
-        strokeColor: "#ea3323"
+        scale: 5,
+        strokeWeight: 3,
+        strokeColor: "#ea3323",
+        fillColor: "#ea3323",
+        fillOpacity: 0.5
     };
 
     vm.shelterlist().forEach(function (shelter) {
@@ -518,10 +520,12 @@ var initMap = function() {
 
         marker.addListener('click', function() {
             populateInfoWindow(this, largeInfowindow);
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+            setTimeout(function(){ marker.setAnimation(null); }, 400);
         });
 
         marker.addListener('mouseover', function() {
-            this.setIcon(bigMarker);
+            this.setIcon(boldMarker);
         });
         marker.addListener('mouseout', function() {
             this.setIcon(normMarker);
@@ -532,7 +536,7 @@ var initMap = function() {
 
 function populateInfoWindow(marker, infowindow) {
     // Check to make sure the infowindow is not already opened on this marker.
-    if (infowindow.marker != marker) {
+    if (infowindow.marker !== marker) {
         infowindow.marker = marker;
         infowindow.setContent(
             '<div><strong>' + marker.title + '</strong></div>'
