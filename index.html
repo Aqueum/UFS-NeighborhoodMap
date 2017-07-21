@@ -10,22 +10,21 @@
 <body>
 <div id="map"></div>
 <div id="box">
-    <p></p>
-    <div data-bind="foreach: filterShelters">
-        <div class="row">
-            <div class="col-md-2" data-bind="text: title"></div>
-        </div>
-    </div>
-    <button data-bind="click: function() { takeMales('True') }">Men</button>
-    <button data-bind="click: function() { takeMales() }">Reset</button>
-    <!--<button data-bind="click: function() { takeFemales('True') }">Women</button>-->
-    <!--<button data-bind="click: function() { takePets('True') }">Pets</button>-->
-    <!--<button data-bind="click: function() { resetAll() }" >All</button>-->
+    <span>Point me to a hostel for a: </span><br>
+    <input id="age" data-bind="value: age, valueAllowUnset: true"/>
+    <span>yr old</span>
+    <button data-bind="click: function() { takeMales('True') }">Man</button>
+    <button data-bind="click: function() { takeFemales('True') }">Woman</button>
+    <button data-bind="click: function() { takePets('True') }">+ Pet</button>
+    <br>
+    <ul id="shelter-list" data-bind="foreach: filterShelters">
+        <li class="col-md-2" data-bind="text: title"></li>
+    </ul>
+    <button data-bind="click: function() { reset() }" style="float: right;">Reset</button>
 </div>
 <div id="title">
     <h1>HomePointr</h1>
 </div>
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
 
 
 <script src="js/lib/knockout-3.4.2.js"></script>

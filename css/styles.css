@@ -58,8 +58,9 @@ html, body {
     left: 20px;
     z-index: 99; /* https://stackoverflow.com/questions/6037712/how-to-float-a-div-over-google-maps */
     background-color: #fff;
-    opacity: 0.8;
-    filter: alpha(opacity=80); /* For IE8 and earlier (https://www.w3schools.com/css/tryit.asp?filename=trycss_transparency)*/
+    opacity: 0.7;
+    filter: alpha(opacity=70); /* For IE8 and earlier (https://www.w3schools.com/css/tryit.asp?filename=trycss_transparency)*/
+    padding: 5px;
 }
 
 #title {
@@ -69,6 +70,11 @@ html, body {
     z-index: 99; /* https://stackoverflow.com/questions/6037712/how-to-float-a-div-over-google-maps */
 }
 
-.gmnoprint {
+#age {
+    width: 20px;
+}
 
+#shelter-list{
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
