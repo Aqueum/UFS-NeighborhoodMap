@@ -24,14 +24,13 @@ var viewModel = function() {
 
     self.shelterlist = ko.observableArray([]);
 
-    shelters.forEach(function(thing){
-        self.shelterlist.push( new Shelter(thing));
+    shelters.forEach(function(data){
+        self.shelterlist.push( new Shelter(data));
     });
 
     self.maleFilter = ko.observable(); // property to store the filter
     self.femaleFilter = ko.observable(); // property to store the filter
     self.petFilter = ko.observable(); // property to store the filter
-    self.activeFilter = ko.observable(); // property to store the filter
 
     self.takeMales = function (answer) {
         self.maleFilter(answer);
@@ -47,8 +46,7 @@ var viewModel = function() {
 
     self.age = ko.observable("");
 
-    self.reset = function (answer) {
-        self.activeFilter(answer);
+    self.reset = function () {
         self.takeMales();
         self.takeFemales();
         self.takePets();
@@ -79,7 +77,7 @@ var viewModel = function() {
     self.femaleShelters = ko.computed(function () {
         if(!self.femaleFilter()) {
             return ko.utils.arrayFilter(self.maleShelters(), function(hostel) {
-                var filtered = hostel.active === self.activeFilter();
+                var filtered = hostel.active === true;
                 if (hostel.marker) {
                     hostel.marker.setVisible(filtered);
                 }
@@ -100,7 +98,7 @@ var viewModel = function() {
     self.petShelters = ko.computed(function () {
         if(!self.petFilter()) {
             return ko.utils.arrayFilter(self.femaleShelters(), function(hostel) {
-                var filtered = hostel.active === self.activeFilter();
+                var filtered = hostel.active === true;
                 if (hostel.marker) {
                     hostel.marker.setVisible(filtered);
                 }
@@ -121,7 +119,7 @@ var viewModel = function() {
     self.filteredShelters = ko.computed(function () {
         if(!self.age()) {
             return ko.utils.arrayFilter(self.petShelters(), function(hostel) {
-                var filtered = hostel.active === self.activeFilter();
+                var filtered = hostel.active === true;
                 if (hostel.marker) {
                     hostel.marker.setVisible(filtered);
                 }
