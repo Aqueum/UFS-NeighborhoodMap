@@ -174,15 +174,6 @@ var initMap = function() {
         }
     });
 
-    // this gives a "Cannot read property 'forEach' of undefined" TypeError:
-    // viewModel.filteredShelters.forEach(function(shelter){
-    //
-    // this gives a "Cannot read property 'length' of undefined" TypeError:
-    // for (var x=0; x < viewModel.filteredShelters.length; x++) {
-    //     var self = viewModel.locations[x];
-    //
-    // this works as expected, but that means plotting all shelters (unfiltered):
-
     var largeInfowindow = new google.maps.InfoWindow();
 
     var bounds = new google.maps.LatLngBounds();
@@ -292,7 +283,3 @@ function populateInfoWindow(marker, infowindow) {
 
 var vm = new viewModel();
 ko.applyBindings(vm);
-
-// tried &callback=viewModel.initMap (in js & in google async call, viewModel.initMap - all raised errors
-// tried moving instantiation & activation of vm inside initMap
-//
