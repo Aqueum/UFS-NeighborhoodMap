@@ -174,7 +174,7 @@ var viewModel = function() {
        } else {
            return ko.utils.arrayFilter(self.shelterlist(), function(hostel) {
                 var filtered = hostel.males === self.maleFilter();
-                filtered.marker.setVisible(true);
+                hostel.marker.setVisible(filtered);
                 return filtered
            });
        }
@@ -186,7 +186,7 @@ var viewModel = function() {
         } else {
             return ko.utils.arrayFilter(self.maleShelters(), function(hostel) {
                 var filtered = hostel.females === self.femaleFilter();
-                filtered.marker.setVisible(true);
+                hostel.marker.setVisible(filtered);
                 return filtered
             });
         }
@@ -198,7 +198,7 @@ var viewModel = function() {
         } else {
             return ko.utils.arrayFilter(self.femaleShelters(), function(hostel) {
                 var filtered = hostel.pets === self.petFilter();
-                filtered.marker.setVisible(true);
+                hostel.marker.setVisible(filtered);
                 return filtered
             });
         }
@@ -210,7 +210,7 @@ var viewModel = function() {
         } else {
             return ko.utils.arrayFilter(self.petShelters(), function(hostel) {
                 var filtered = hostel.minAge <= self.age() && hostel.maxAge >= self.age();
-                filtered.marker.setVisible(true);
+                hostel.marker.setVisible(filtered);
                 return filtered
             });
         }
@@ -565,7 +565,6 @@ var initMap = function() {
                 strokeWeight: 3,
                 strokeColor: "#ea3323"
             },
-            visible: false
         });
         shelter.marker = marker;
     })
