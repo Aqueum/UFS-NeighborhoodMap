@@ -249,7 +249,7 @@ var viewModel = function() {
 
     self.showLabel = function(hostel) {
         console.log(hostel);
-        initMap.openInfoWindow(hostel);
+        openInfoWindow(hostel);
     }
 
     // prior attempt at itterative filtering:
@@ -638,10 +638,6 @@ var initMap = function() {
         });
     });
     map.fitBounds(bounds);
-
-    function openInfoWindow(marker) {
-        populateInfoWindow(marker, largeInfowindow);
-    }
 };
 
 function populateInfoWindow(marker, infowindow) {
@@ -662,6 +658,11 @@ function populateInfoWindow(marker, infowindow) {
             infowindow.setMarker = null;
         });
     }
+}
+
+function openInfoWindow(marker) {
+    var Infowindow = new google.maps.InfoWindow();
+    populateInfoWindow(marker, Infowindow);
 }
 
 var vm = new viewModel();
