@@ -149,17 +149,14 @@ var viewModel = function() {
 
     self.takeMales = function (answer) {
         self.maleFilter(answer);
-        marker.setVisible();
     };
 
     self.takeFemales = function (answer) {
         self.femaleFilter(answer);
-        marker.setVisible();
     };
 
     self.takePets = function (answer) {
         self.petFilter(answer);
-        marker.setVisible();
     };
 
     self.age = ko.observable("");
@@ -169,7 +166,6 @@ var viewModel = function() {
         self.takeFemales();
         self.takePets();
         self.age(null);
-        marker.setVisible();
     };
 
     self.maleShelters = ko.computed(function () {
@@ -177,7 +173,9 @@ var viewModel = function() {
            return self.shelterlist();
        } else {
            return ko.utils.arrayFilter(self.shelterlist(), function(hostel) {
-               return hostel.males === self.maleFilter();
+               var filtered = hostel.males === self.maleFilter();
+               marker.setVisible(filtered);
+               return filtered
            });
        }
     });
@@ -187,7 +185,9 @@ var viewModel = function() {
             return self.maleShelters();
         } else {
             return ko.utils.arrayFilter(self.maleShelters(), function(hostel) {
-                return hostel.females === self.femaleFilter();
+                var filtered = hostel.females === self.femaleFilter();
+                marker.setVisible(filtered);
+                return filtered
             });
         }
     });
@@ -197,7 +197,9 @@ var viewModel = function() {
             return self.femaleShelters();
         } else {
             return ko.utils.arrayFilter(self.femaleShelters(), function(hostel) {
-                return hostel.pets === self.petFilter();
+                var filtered = hostel.pets === self.petFilter();
+                marker.setVisible(filtered);
+                return filtered
             });
         }
     });
@@ -207,7 +209,9 @@ var viewModel = function() {
             return self.petShelters();
         } else {
             return ko.utils.arrayFilter(self.petShelters(), function(hostel) {
-                return hostel.minAge <= self.age() && hostel.maxAge >= self.age();
+                var filtered = hostel.minAge <= self.age() && hostel.maxAge >= self.age();
+                marker.setVisible(filtered);
+                return filtered
             });
         }
     });
