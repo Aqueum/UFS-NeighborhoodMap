@@ -173,14 +173,10 @@ var viewModel = function() {
            return self.shelterlist();
        } else {
            return ko.utils.arrayFilter(self.shelterlist(), function(hostel) {
-               var filtered = hostel.males === self.maleFilter();
-               for (i=0; i<self.shelterlist.length; i++) {
-                   marker[i].setVisible(false)
-               }
-               for (j=0; j<filtered.length; j++) {
-                   marker[j].setVisible(true)
-               }
-               return filtered
+                var filtered = hostel.males === self.maleFilter();
+                self.shelterlist.marker.setVisible(false);
+                filtered.marker.setVisible(true);
+                return filtered
            });
        }
     });
@@ -191,12 +187,8 @@ var viewModel = function() {
         } else {
             return ko.utils.arrayFilter(self.maleShelters(), function(hostel) {
                 var filtered = hostel.females === self.femaleFilter();
-                for (i=0; i<self.shelterlist.length; i++) {
-                    marker[i].setVisible(false)
-                }
-                for (j=0; j<filtered.length; j++) {
-                    marker[j].setVisible(true)
-                }
+                self.shelterlist.marker.setVisible(false);
+                filtered.marker.setVisible(true);
                 return filtered
             });
         }
@@ -208,12 +200,8 @@ var viewModel = function() {
         } else {
             return ko.utils.arrayFilter(self.femaleShelters(), function(hostel) {
                 var filtered = hostel.pets === self.petFilter();
-                for (i=0; i<self.shelterlist.length; i++) {
-                    marker[i].setVisible(false)
-                }
-                for (j=0; j<filtered.length; j++) {
-                    marker[j].setVisible(true)
-                }
+                self.shelterlist.marker.setVisible(false);
+                filtered.marker.setVisible(true);
                 return filtered
             });
         }
@@ -225,12 +213,8 @@ var viewModel = function() {
         } else {
             return ko.utils.arrayFilter(self.petShelters(), function(hostel) {
                 var filtered = hostel.minAge <= self.age() && hostel.maxAge >= self.age();
-                for (i=0; i<self.shelterlist.length; i++) {
-                    marker[i].setVisible(false)
-                }
-                for (j=0; j<filtered.length; j++) {
-                    marker[j].setVisible(true)
-                }
+                self.shelterlist.marker.setVisible(false);
+                filtered.marker.setVisible(true);
                 return filtered
             });
         }
@@ -574,7 +558,7 @@ var initMap = function() {
     //     var self = viewModel.locations[x];
     //
     // this works as expected, but that means plotting all shelters (unfiltered):
-    vm.filteredShelters().forEach(function (shelter) {
+    vm.shelterlist().forEach(function (shelter) {
         var marker = new google.maps.Marker({
             position: shelter.location,
             map: map,
