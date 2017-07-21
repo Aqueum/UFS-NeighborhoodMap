@@ -144,37 +144,62 @@ var ViewModel = function() {
     });
 
     self.maleFilter = ko.observable(); // property to store the filter
-    // self.femaleFilter = ko.observable(); // property to store the filter
-    // self.petFilter = ko.observable(); // property to store the filter
-    // self.showAll = ko.observable(); // property to store the filter
-
-    self.filterShelters = ko.computed(function () {
-       if(!self.maleFilter()) {
-           return self.shelterlist();
-       } else {
-           return ko.utils.arrayFilter(self.shelterlist(), function(prod) {
-               return prod.males === self.maleFilter();
-           });
-       }
-    });
+    self.femaleFilter = ko.observable(); // property to store the filter
+    self.petFilter = ko.observable(); // property to store the filter
 
     self.takeMales = function (answer) {
         self.maleFilter(answer);
     };
 
+    self.takeFemales = function (answer) {
+        self.femaleFilter(answer);
+    };
+
+    self.takePets = function (answer) {
+        self.petFilter(answer);
+    };
+
+    self.age = ko.observable("");
+
+    self.reset = function () {
+        self.takeMales();
+        self.takeFemales();
+        self.takePets();
+        self.age(null);
+    };
+
+    self.maleShelters = ko.computed(function () {
+       if(!self.maleFilter()) {
+           return self.shelterlist();
+       } else {
+           return ko.utils.arrayFilter(self.shelterlist(), function(hostel) {
+               return hostel.males === self.maleFilter();
+           });
+       }
+    });
+
+    self.femaleShelters = ko.computed(function () {
+        if(!self.femaleFilter()) {
+            return self.maleShelters();
+        } else {
+            return ko.utils.arrayFilter(self.maleShelters(), function(hostel) {
+                return hostel.females === self.femaleFilter();
+            });
+        }
+    });
+
+    self.filterShelters = ko.computed(function () {
+        if(!self.petFilter()) {
+            return self.femaleShelters();
+        } else {
+            return ko.utils.arrayFilter(self.femaleShelters(), function(hostel) {
+                return hostel.pets === self.petFilter();
+            });
+        }
+    });
 
 
-    // self.takeFemales = function (answer) {
-    //     self.femaleFilter(answer);
-    // };
-    //
-    // self.takePets = function (answer) {
-    //     self.petFilter(answer);
-    // };
-    //
-    // self.resetAll = function () {
-    //     self.showAll('True');
-    // };
+
 
     // var filterSet = ko.observableArray([
     //     self.maleFilter()
