@@ -595,6 +595,20 @@ var initMap = function() {
 
     var bounds = new google.maps.LatLngBounds();
 
+    var normMarker = {
+        path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,  // https://www.tutorialspoint.com/google_maps/google_maps_symbols.htm
+            scale: 5,
+        strokeWeight: 3,
+        strokeColor: "#ea3323"
+    };
+
+    var bigMarker = {
+        path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,  // https://www.tutorialspoint.com/google_maps/google_maps_symbols.htm
+        scale: 6,
+        strokeWeight: 4,
+        strokeColor: "#ea3323"
+    };
+
     vm.shelterlist().forEach(function (shelter) {
         var marker = new google.maps.Marker({
             position: shelter.location,
@@ -606,12 +620,7 @@ var initMap = function() {
             url: shelter.url,
             wiki: shelter.wiki,
             twitter: shelter.twitter,
-            icon: {
-                path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,  // https://www.tutorialspoint.com/google_maps/google_maps_symbols.htm
-                scale: 5,
-                strokeWeight: 3,
-                strokeColor: "#ea3323"
-            },
+            icon: normMarker
         });
         shelter.marker = marker;
 
@@ -619,6 +628,13 @@ var initMap = function() {
 
         marker.addListener('click', function() {
             populateInfoWindow(this, largeInfowindow);
+        });
+
+        marker.addListener('mouseover', function() {
+            this.setIcon(bigMarker);
+        });
+        marker.addListener('mouseout', function() {
+            this.setIcon(normMarker);
         });
     });
     map.fitBounds(bounds);
