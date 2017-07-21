@@ -12,11 +12,12 @@ var shelters = [
         wiki: 'https://en.wikipedia.org/wiki/Bethany_Christian_Trust#Emergency_accommodation_-_Bethany_House',
         url: 'http://www.bethanychristiantrust.com/services/emergency-resettlement/',
         twitter: '@_BethanyCT',
-        males: 'True',
-        females: 'True',
+        males: true,
+        females: true,
         minAge: 16,
         maxAge: 999,
-        pets: 'False'
+        pets: false,
+        active: true
     },{
         title: 'Pleasance Lifehouse',
         location: {lat: 55.949095, lng: -3.183409},
@@ -26,11 +27,12 @@ var shelters = [
         wiki: 'https://en.wikipedia.org/wiki/The_Salvation_Army',
         url: 'https://www.salvationarmy.org.uk/pleasance-lifehouse',
         twitter: '@salvationarmyuk',
-        males: 'True',
-        females: 'False',
+        males: true,
+        females: false,
         minAge: 18,
         maxAge: 70,
-        pets: 'False'
+        pets: false,
+        active: true
     },{
         title: 'Castlecliff',
         location: {lat: 55.948042, lng: -3.197942},
@@ -40,25 +42,27 @@ var shelters = [
         wiki: 'https://en.wikipedia.org/wiki/Politics_of_Edinburgh#Council_and_committees',
         url: 'https://www.edinburgh.gov.uk/directory_record/20741/castlecliff',
         twitter: '@Edinburgh_CC',
-        males: 'True',
-        females: 'True',
+        males: true,
+        females: true,
         minAge: 16,
         maxAge: 999,
-        pets: 'True'
+        pets: true,
+        active: true
     },{
         title: 'Keymoves',
         location: {lat: 55.950814, lng: -3.184032},
         address: '2 Cranston Street',
         phone: '0131 556 8939',
         email: 'info@keymoves.org.uk',
-        wiki: '',
+        wiki: 'https://en.wikipedia.org/wiki/Keymoves',
         url: 'http://www.keymoves.org.uk/',
         twitter: '',
-        males: 'False',
-        females: 'True',
+        males: false,
+        females: true,
         minAge: 18,
         maxAge: 999,
-        pets: 'False'
+        pets: false,
+        active: true
     },{
         title: 'Cunningham House',
         location: {lat: 55.948521, lng: -3.188035},
@@ -68,53 +72,57 @@ var shelters = [
         wiki: 'https://en.wikipedia.org/wiki/Church_of_Scotland#Councils',
         url: 'http://www.crossreach.org.uk/cunningham-house',
         twitter: '@CrossReach',
-        males: 'True',
-        females: 'True',
+        males: true,
+        females: true,
         minAge: 18,
         maxAge: 65,
-        pets: 'False'
+        pets: false,
+        active: true
     },{
         title: 'Dunedin Harbour',
         location: {lat: 55.974320, lng: -3.172797},
         address: '4 Parliament Street',
         phone: '0131 624 5800',
         email: 'hostel@dunedincanmore.org.uk',
-        wiki: '',
+        wiki: 'https://en.wikipedia.org/wiki/Dunedin_Harbour',
         url: 'https://www.dunedincanmore.org.uk/2/dunedin-harbour',
         twitter: '@DunedinCanmore',
-        males: 'True',
-        females: 'True',
+        males: true,
+        females: true,
         minAge: 16,
         maxAge: 999,
-        pets: 'True'
+        pets: true,
+        active: true
     },{
         title: 'Number Twenty',
         location: {lat: 55.958834, lng: -3.188510},
         address: '20 Broughton Place',
         phone: '0131 557 1739',
         email: 'lindam@foursquare.org.uk',
-        wiki: '',
+        wiki: 'https://en.wikipedia.org/wiki/Number_Twenty',
         url: 'http://www.foursquare.org.uk/our-services/accommodation-and-support/number-20/',
         twitter: '@FourSquareEdin',
-        males: 'False',
-        females: 'True',
+        males: false,
+        females: true,
         minAge: 16,
         maxAge: 21,
-        pets: 'False'
+        pets: false,
+        active: true
     },{
         title: 'Stopover',
         location: {lat: 55.944195, lng: -3.211942},
         address: '40 Grove Street',
         phone: '0131 229 6907',
         email: 'lindam@foursquare.org.uk',
-        wiki: '@FourSquareEdin',
+        wiki: 'https://en.wikipedia.org/wiki/Stopover_Edinburgh',
         url: 'http://www.foursquare.org.uk/our-services/accommodation-and-support/stopover/',
-        twitter: '',
-        males: 'True',
-        females: 'True',
+        twitter: '@FourSquareEdin',
+        males: true,
+        females: true,
         minAge: 16,
         maxAge: 21,
-        pets: 'False'
+        pets: false,
+        active: true
     }
 ];
 
@@ -132,6 +140,7 @@ var Shelter = function(data) {
     this.minAge = data.minAge;
     this.maxAge = data.maxAge;
     this.pets = data.pets;
+    this.active = data.active;
 };
 
 var viewModel = function() {
@@ -146,6 +155,7 @@ var viewModel = function() {
     self.maleFilter = ko.observable(); // property to store the filter
     self.femaleFilter = ko.observable(); // property to store the filter
     self.petFilter = ko.observable(); // property to store the filter
+    self.activeFilter = ko.observable(); // property to store the filter
 
     self.takeMales = function (answer) {
         self.maleFilter(answer);
@@ -161,7 +171,8 @@ var viewModel = function() {
 
     self.age = ko.observable("");
 
-    self.reset = function () {
+    self.reset = function (answer) {
+        self.activeFilter(answer);
         self.takeMales();
         self.takeFemales();
         self.takePets();
@@ -170,6 +181,11 @@ var viewModel = function() {
 
     self.maleShelters = ko.computed(function () {
        if(!self.maleFilter()) {
+           // return ko.utils.arrayFilter(self.shelterlist(), function(hostel) {
+           //     var filtered = hostel.active === true;
+           //     hostel.marker.setVisible(filtered);
+           //     return filtered
+           // });
            return self.shelterlist();
        } else {
            return ko.utils.arrayFilter(self.shelterlist(), function(hostel) {
@@ -182,6 +198,11 @@ var viewModel = function() {
 
     self.femaleShelters = ko.computed(function () {
         if(!self.femaleFilter()) {
+            // return ko.utils.arrayFilter(self.maleShelters(), function(hostel) {
+            //     var filtered = hostel.active === self.activeFilter();
+            //     hostel.marker.setVisible(filtered);
+            //     return filtered
+            // });
             return self.maleShelters();
         } else {
             return ko.utils.arrayFilter(self.maleShelters(), function(hostel) {
@@ -194,6 +215,11 @@ var viewModel = function() {
 
     self.petShelters = ko.computed(function () {
         if(!self.petFilter()) {
+            // return ko.utils.arrayFilter(self.femaleShelters(), function(hostel) {
+            //     var filtered = hostel.active === self.activeFilter();
+            //     hostel.marker.setVisible(filtered);
+            //     return filtered
+            // });
             return self.femaleShelters();
         } else {
             return ko.utils.arrayFilter(self.femaleShelters(), function(hostel) {
@@ -206,6 +232,11 @@ var viewModel = function() {
 
     self.filteredShelters = ko.computed(function () {
         if(!self.age()) {
+            // return ko.utils.arrayFilter(self.petShelters(), function(hostel) {
+            //     var filtered = hostel.active === self.activeFilter();
+            //     hostel.marker.setVisible(filtered);
+            //     return filtered
+            // });
             return self.petShelters();
         } else {
             return ko.utils.arrayFilter(self.petShelters(), function(hostel) {
@@ -215,6 +246,11 @@ var viewModel = function() {
             });
         }
     });
+
+    self.showLabel = function(hostel) {
+        console.log(hostel);
+        initMap.openInfoWindow(hostel);
+    }
 
     // prior attempt at itterative filtering:
     // var filterSet = ko.observableArray([
@@ -554,11 +590,22 @@ var initMap = function() {
     //     var self = viewModel.locations[x];
     //
     // this works as expected, but that means plotting all shelters (unfiltered):
+
+    var largeInfowindow = new google.maps.InfoWindow();
+
+    var bounds = new google.maps.LatLngBounds();
+
     vm.shelterlist().forEach(function (shelter) {
         var marker = new google.maps.Marker({
             position: shelter.location,
             map: map,
             title: shelter.title,
+            address: shelter.address,
+            phone: shelter.phone,
+            email: shelter.email,
+            url: shelter.url,
+            wiki: shelter.wiki,
+            twitter: shelter.twitter,
             icon: {
                 path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,  // https://www.tutorialspoint.com/google_maps/google_maps_symbols.htm
                 scale: 5,
@@ -567,8 +614,39 @@ var initMap = function() {
             },
         });
         shelter.marker = marker;
-    })
+
+        bounds.extend(marker.position);
+
+        marker.addListener('click', function() {
+            populateInfoWindow(this, largeInfowindow);
+        });
+    });
+    map.fitBounds(bounds);
+
+    function openInfoWindow(marker) {
+        populateInfoWindow(marker, largeInfowindow);
+    }
 };
+
+function populateInfoWindow(marker, infowindow) {
+    // Check to make sure the infowindow is not already opened on this marker.
+    if (infowindow.marker != marker) {
+        infowindow.marker = marker;
+        infowindow.setContent(
+            '<div><strong>' + marker.title + '</strong></div>'
+            + '<div>&#9659; ' + marker.address + '</div>'
+            + '<div>&#9659; ' + marker.phone + '</div>'
+            + '<a href="mailto:' + marker.email + '?Subject=HomePointr%20enquiry">Email</a>'
+            + ' | <a href="' + marker.url + '" target="_blank">Website</a>'
+            + ' | <a href="' + marker.wiki + '" target="_blank">Wikipedia</a>'
+        );
+        infowindow.open(map, marker);
+        // Make sure the marker property is cleared if the infowindow is closed.
+        infowindow.addListener('closeclick',function(){
+            infowindow.setMarker = null;
+        });
+    }
+}
 
 var vm = new viewModel();
 ko.applyBindings(vm);

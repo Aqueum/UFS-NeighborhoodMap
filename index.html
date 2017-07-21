@@ -13,14 +13,14 @@
     <span>Point me to a hostel for a: </span><br>
     <input id="age" data-bind="value: age, valueAllowUnset: true"/>
     <span>yr old</span>
-    <button data-bind="click: function() { takeMales('True') }">Man</button>
-    <button data-bind="click: function() { takeFemales('True') }">Woman</button>
-    <button data-bind="click: function() { takePets('True') }">+ Pet</button>
+    <button data-bind="click: function() { takeMales(true) }">Man</button>
+    <button data-bind="click: function() { takeFemales(true) }">Woman</button>
+    <button data-bind="click: function() { takePets(true) }">+ Pet</button>
     <br>
     <ul id="shelter-list" data-bind="foreach: filteredShelters">
-        <li class="col-md-2" data-bind="text: title"></li>
+        <li data-bind="text: title, click: $parent.showLabel"></li>
     </ul>
-    <button data-bind="click: function() { reset() }" style="float: right;">Reset</button>
+    <button data-bind="click: function() { reset(true) }" style="float: right;">Reset</button>
 </div>
 <div id="title">
     <h1>HomePointr</h1>
