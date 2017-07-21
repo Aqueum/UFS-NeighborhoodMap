@@ -149,14 +149,17 @@ var viewModel = function() {
 
     self.takeMales = function (answer) {
         self.maleFilter(answer);
+        marker.setVisible();
     };
 
     self.takeFemales = function (answer) {
         self.femaleFilter(answer);
+        marker.setVisible();
     };
 
     self.takePets = function (answer) {
         self.petFilter(answer);
+        marker.setVisible();
     };
 
     self.age = ko.observable("");
@@ -166,6 +169,7 @@ var viewModel = function() {
         self.takeFemales();
         self.takePets();
         self.age(null);
+        marker.setVisible();
     };
 
     self.maleShelters = ko.computed(function () {
@@ -546,7 +550,7 @@ var initMap = function() {
     //     var self = viewModel.locations[x];
     //
     // this works as expected, but that means plotting all shelters (unfiltered):
-    vm.filteredShelters().forEach(function(shelter){
+    vm.filteredShelters().forEach(function (shelter) {
         var marker = new google.maps.Marker({
             position: shelter.location,
             map: map,
@@ -554,12 +558,17 @@ var initMap = function() {
             icon: {
                 path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,  // https://www.tutorialspoint.com/google_maps/google_maps_symbols.htm
                 scale: 5,
-                strokeWeight:3,
-                strokeColor:"#ea3323"
+                strokeWeight: 3,
+                strokeColor: "#ea3323"
             }
         });
+        shelter.marker = marker;
     })
 };
 
 var vm = new viewModel();
 ko.applyBindings(vm);
+
+// tried &callback=viewModel.initMap (in js & in google async call, viewModel.initMap - all raised errors
+// tried moving instantiation & activation of vm inside initMap
+//
