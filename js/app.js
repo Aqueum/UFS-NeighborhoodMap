@@ -248,8 +248,7 @@ var viewModel = function() {
     });
 
     self.showLabel = function(hostel) {
-        console.log(hostel);
-        // openInfoWindow(hostel);
+        google.maps.event.trigger(hostel.marker, "click")
         // wikiData(hostel.title)
     }
 
@@ -659,11 +658,6 @@ function populateInfoWindow(marker, infowindow) {
             infowindow.setMarker = null;
         });
     }
-}
-
-function openInfoWindow(marker) {
-    var Infowindow = new google.maps.InfoWindow();
-    populateInfoWindow(marker, Infowindow);
 }
 
 // NEED TO DE-AJAX THIS
