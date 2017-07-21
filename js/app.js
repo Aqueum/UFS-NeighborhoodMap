@@ -137,11 +137,6 @@ var viewModel = function() {
         }
     });
 
-    self.showLabel = function(hostel) {
-        google.maps.event.trigger(hostel.marker, "click")
-        // wikiData(hostel.title)
-    }
-
     // prior attempt at itterative filtering:
     // var filterSet = ko.observableArray([
     //     self.maleFilter()
@@ -160,6 +155,14 @@ var viewModel = function() {
     //     return currentList;
     // });
 
+    self.showLabel = function(hostel) {
+        google.maps.event.trigger(hostel.marker, "click")
+        // wikiData(hostel.title)
+    }
+
+    self.wikibox = function () {
+        console.log("someone wants wikipedia")
+    };
 };
 
 var initMap = function() {
@@ -237,7 +240,7 @@ function populateInfoWindow(marker, infowindow) {
             + '<div>&#9659; ' + marker.phone + '</div>'
             + '<a href="mailto:' + marker.email + '?Subject=HomePointr%20enquiry">Email</a>'
             + ' | <a href="' + marker.url + '" target="_blank">Website</a>'
-            + ' | <a href="' + marker.wiki + '" target="_blank">Wikipedia</a>'
+            + ' | <button data-bind="click: function() { wikibox() }">Wikipedia</button>'
         );
         infowindow.open(map, marker);
         // Make sure the marker property is cleared if the infowindow is closed.
