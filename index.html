@@ -17,7 +17,7 @@
     <button data-bind="click: function() { takeFemales('True') }">Woman</button>
     <button data-bind="click: function() { takePets('True') }">+ Pet</button>
     <br>
-    <ul id="shelter-list" data-bind="foreach: filterShelters">
+    <ul id="shelter-list" data-bind="foreach: filteredShelters">
         <li class="col-md-2" data-bind="text: title"></li>
     </ul>
     <button data-bind="click: function() { reset() }" style="float: right;">Reset</button>
