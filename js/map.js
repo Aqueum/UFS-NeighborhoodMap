@@ -2,7 +2,9 @@
  * Created by martin on 22/07/2017.
  */
 
+// Main google maps interface
 var initMap = function() {
+    // Create and style the map
     var map = new google.maps.Map(document.getElementById('map'), {
         center: {lat:  55.953252, lng: -3.188267},
         zoom: 13,
@@ -19,6 +21,7 @@ var initMap = function() {
 
     var bounds = new google.maps.LatLngBounds();
 
+    // format markers
     var normMarker = {
         // https://www.tutorialspoint.com/google_maps/google_maps_symbols.htm
         path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
@@ -36,6 +39,7 @@ var initMap = function() {
         fillOpacity: 0.5
     };
 
+    // pull in location list from viewModel and create markers
     vm.shelterlist().forEach(function (shelter) {
         var marker = new google.maps.Marker({
             position: shelter.location,
@@ -53,6 +57,7 @@ var initMap = function() {
 
         bounds.extend(marker.position);
 
+        // Animate the marker on click & generate infowindow
         // https://stackoverflow.com/questions/7339200/bounce-a-pin-in-google-maps-once
         marker.addListener('click', function() {
             populateInfoWindow(this, largeInfowindow);
@@ -60,6 +65,7 @@ var initMap = function() {
             setTimeout(function(){ marker.setAnimation(null); }, 400);
         });
 
+        // fill in markers on mouse-over & empty again on mouse-out
         marker.addListener('mouseover', function() {
             this.setIcon(boldMarker);
         });
@@ -70,12 +76,13 @@ var initMap = function() {
     map.fitBounds(bounds);
 };
 
+// define infowindow with name, address phone number & links
 function populateInfoWindow(marker, infowindow) {
     // Check infowindow is not already open on this marker.
     if (infowindow.marker !== marker) {
         infowindow.marker = marker;
         infowindow.setContent(
-            '<div><strong>' + marker.title + '</strong></div>'
+            '<div>' + marker.title + '</div>'
             + '<div>&#9659; ' + marker.address + '</div>'
             + '<div>&#9659; ' + marker.phone + '</div>'
             + '<a href="mailto:' + marker.email
