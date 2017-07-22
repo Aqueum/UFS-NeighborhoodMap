@@ -28,7 +28,7 @@ var wikiDatum = function(data) {
 };
 
 // Knockout JS' (MVVM) ViewModel
-var viewModel = function() {
+var ViewModel = function() {
     var self = this;
 
     // initialise & populate list of hostels
@@ -203,5 +203,5 @@ var viewModel = function() {
     };
 };
 
-var vm = new viewModel();
+var vm = new ViewModel();
 ko.applyBindings(vm);

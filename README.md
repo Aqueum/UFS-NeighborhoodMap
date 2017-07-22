@@ -20,6 +20,16 @@ please [contact me](http://www.aqueum.com/contact/)
 ## Distracting API results
 The rubric requires use of a second API.  Other than Twitter (which requires TLS), I couldn't find any public APIs that would generate real value. So I have left it with a wikipedia serarch based on the hostel name.  This may be useful in development mode if the app was expanded to cover hundeds of hostels, but currently seems an irrelevant distraction.
 
+## Confusing review suggestions
+### map.js open links in new tab
+Suggestion to add `target` & give it a `_blank`, but my code said from the start:
+`            + ' | <a href="' + marker.url + '" target="_blank">Website</a>'
+             + ' | <a href="' + marker.wiki + '" target="_blank">Wikipedia</a>'`
+
+### viewModel name
+I'm not sure if the improper Class naming style is saying that `viewModel` is a Class, hence should be `ViewModel`, I originally had it that way, then changed it to 'viewModel' on reading this suggestion by a Udacity Forum mentor.  [Kockoutjs.com](http://knockoutjs.com/examples/helloWorld.html) uses ViewModel, so I have now refactored that way.
+
+
 # Files
 ## index.html
 The html file that is served as the initial view, which calls app.js which does most of the heavy lifting

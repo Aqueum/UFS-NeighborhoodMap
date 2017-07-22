@@ -39,7 +39,7 @@ var initMap = function() {
         fillOpacity: 0.5
     };
 
-    // pull in location list from viewModel and create markers
+    // pull in location list from ViewModel and create markers
     vm.shelterlist().forEach(function (shelter) {
         var marker = new google.maps.Marker({
             position: shelter.location,
