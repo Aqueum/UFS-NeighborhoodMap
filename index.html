@@ -40,16 +40,16 @@
     <span style="float: right;">&nbsp;</span>
 
     <!--more/less info button to normally hid the pointless wiki api results-->
-    <button class="hideable" id="wiki" data-bind="visible: !verbose(),
+    <button class="hideable wiki" data-bind="visible: !verbose(),
     click: function() { more(true) }">Wikipedia the above</button>
-    <button id="wiki" data-bind="visible: verbose,
+    <button class="wiki" data-bind="visible: verbose,
     click: function() { more(false) }">
         Lose the wikipedia links
     </button>
     <div data-bind="visible: verbose">
         <br>
         <!--pointless wikipedia api results-->
-        <div id="wiki" data-bind="visible: wikidata().length > 0">
+        <div class="wiki" data-bind="visible: wikidata().length > 0">
             <br>
             <span>Possible wikipedia articles:</span>
             <ol data-bind="foreach: wikidata">
@@ -57,12 +57,11 @@
                 attr: { href: wikiURL }"></a></li>
             </ol>
         </div>
-        <div id="wiki" data-bind="visible: wikidata().length <= 0">
+        <div class="wiki" data-bind="visible: wikidata().length <= 0">
             <br>
             <span>No wikipedia articles found</span>
         </div>
-
-    </a>
+    </div>
 </div>
 
 <!--imports-->
