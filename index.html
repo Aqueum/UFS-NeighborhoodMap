@@ -10,15 +10,15 @@
 <body>
 
 <!--background map-->
-<div id="map"></div>
+<main id="map"></main>
 
 <!--Title block-->
-<div id="title">
+<header id="title">
     <h1>HomePointr</h1>
-</div>
+</header>
 
 <!--floating data box-->
-<div id="box">
+<aside id="box">
 
     <!--filter set, to input age, gender(s) & whether you have a pet-->
     <span>Point me to a hostel for a: </span><br>
@@ -30,8 +30,10 @@
     <br>
 
     <!--hostel list-->
-    <ul class="hideable" id="shelter-list" data-bind="foreach: filteredShelters">
-        <li id="clickable" data-bind="text: title, click: $parent.showLabel"></li>
+    <ul class="hideable" id="shelter-list"
+        data-bind="foreach: filteredShelters">
+        <li id="clickable"
+            data-bind="text: title, click: $parent.showLabel"></li>
     </ul>
 
     <!--filter reset - to get whole list-->
@@ -41,9 +43,9 @@
 
     <!--more/less info button to normally hid the pointless wiki api results-->
     <button class="hideable wiki" data-bind="visible: !verbose(),
-    click: function() { more(true) }">Wikipedia the above</button>
+        click: function() { more(true) }">Wikipedia the above</button>
     <button class="wiki" data-bind="visible: verbose,
-    click: function() { more(false) }">
+        click: function() { more(false) }">
         Lose the wikipedia links
     </button>
     <div data-bind="visible: verbose">
@@ -54,7 +56,7 @@
             <span>Possible wikipedia articles:</span>
             <ol data-bind="foreach: wikiData">
                 <li><a data-bind="text: wikiTitle,
-                attr: { href: wikiURL }"></a></li>
+                    attr: { href: wikiURL }"></a></li>
             </ol>
         </div>
         <div class="wiki" data-bind="visible: wikiData().length <= 0">
@@ -62,7 +64,8 @@
             <span>No wikipedia articles found</span>
         </div>
     </div>
-</div>
+
+</aside>
 
 <!--imports-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
@@ -73,6 +76,9 @@
 <script src="js/map.js"></script>
 <script src="js/app.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyCUqFBJkQPW0zQHlQr62QJsd8I1ni1DXTY&v=3&callback=initMap"
-        async defer onerror="googleErrorHandler()"></script>
+        onerror="googleErrorHandler()"
+        async defer></script>
+
 </body>
+
 </html>
