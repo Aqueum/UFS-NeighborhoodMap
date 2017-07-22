@@ -180,16 +180,15 @@ var ViewModel = function() {
                 "search": searchstring,
                 "format": "json"
             },
-            dataType: "jsonp",
-            success: function (response) {
-                self.wikiData([]); // reset wikiData at start of search
-                for (var article=0; article < response[1].length; article++) {
-                    self.wikiData.push(new wikiDatum({
-                        wikiTitle: response[1][article],
-                        wikiInfo: response[2][article],
-                        wikiURL: response[3][article]
-                    }));
-                }
+            dataType: "jsonp"
+        }).done(function (response) {
+            self.wikiData([]); // reset wikiData at start of search
+            for (var article=0; article < response[1].length; article++) {
+                self.wikiData.push(new wikiDatum({
+                    wikiTitle: response[1][article],
+                    wikiInfo: response[2][article],
+                    wikiURL: response[3][article]
+                }));
             }
         }).fail(function (jqXHR, textStatus) {
             self.wikiData.push(new wikiDatum({
@@ -199,35 +198,6 @@ var ViewModel = function() {
             }));
         });
     };
-
-    // tried this, but uncaught reference errors
-    // var wikipediaEndPointUrl = "https://en.wikipedia.org/w/api.php";
-    // $.ajax({
-    //     url: wikipediaEndPointUrl,
-    //     data: {
-    //         "action": "opensearch",
-    //         "search": searchstring,
-    //         "format": "json"
-    //     },
-    //     dataType: "jsonp"
-    // }).done(function (data) {
-    //     self.wikiData([]); // reset wikiData at start of search
-    //     for (var article=0; article < response[1].length; article++) {
-    //         self.wikiData.push(new wikiDatum({
-    //             wikiTitle: response[1][article],
-    //             wikiInfo: response[2][article],
-    //             wikiURL: response[3][article]
-    //         }));
-    //     }
-    // }).fail(function (jqXHR, textStatus) {
-    //     self.wikiData.push(new wikiDatum({
-    //         wikiTitle: 'Wikipedia timed out with no results',
-    //         wikiInfo: '',
-    //         wikiURL: ''
-    //     }));
-    // });
-// };
-
 };
 
 var vm = new ViewModel();
