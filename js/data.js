@@ -19,21 +19,6 @@ var shelters = [
         pets: false,
         active: true
     },{
-        title: 'Pleasance Lifehouse',
-        location: {lat: 55.949095, lng: -3.183409},
-        address: '1 The Pleasance',
-        phone: '0131 556 9674',
-        email: 'eastscotland@salvationarmy.org.uk',
-        wiki: 'https://en.wikipedia.org/wiki/The_Salvation_Army',
-        url: 'https://www.salvationarmy.org.uk/pleasance-lifehouse',
-        twitter: '@salvationarmyuk',
-        males: true,
-        females: false,
-        minAge: 18,
-        maxAge: 70,
-        pets: false,
-        active: true
-    },{
         title: 'Castlecliff',
         location: {lat: 55.948042, lng: -3.197942},
         address: '25 Johnston Terrace',
@@ -47,21 +32,6 @@ var shelters = [
         minAge: 16,
         maxAge: 999,
         pets: true,
-        active: true
-    },{
-        title: 'Keymoves',
-        location: {lat: 55.950814, lng: -3.184032},
-        address: '2 Cranston Street',
-        phone: '0131 556 8939',
-        email: 'info@keymoves.org.uk',
-        wiki: 'https://en.wikipedia.org/wiki/Keymoves',
-        url: 'http://www.keymoves.org.uk/',
-        twitter: '',
-        males: false,
-        females: true,
-        minAge: 18,
-        maxAge: 999,
-        pets: false,
         active: true
     },{
         title: 'Cunningham House',
@@ -94,6 +64,21 @@ var shelters = [
         pets: true,
         active: true
     },{
+        title: 'Keymoves',
+        location: {lat: 55.950814, lng: -3.184032},
+        address: '2 Cranston Street',
+        phone: '0131 556 8939',
+        email: 'info@keymoves.org.uk',
+        wiki: 'https://en.wikipedia.org/wiki/Keymoves',
+        url: 'http://www.keymoves.org.uk/',
+        twitter: '',
+        males: false,
+        females: true,
+        minAge: 18,
+        maxAge: 999,
+        pets: false,
+        active: true
+    },{
         title: 'Number Twenty',
         location: {lat: 55.958834, lng: -3.188510},
         address: '20 Broughton Place',
@@ -106,6 +91,21 @@ var shelters = [
         females: true,
         minAge: 16,
         maxAge: 21,
+        pets: false,
+        active: true
+    },{
+        title: 'Pleasance Lifehouse',
+        location: {lat: 55.949095, lng: -3.183409},
+        address: '1 The Pleasance',
+        phone: '0131 556 9674',
+        email: 'eastscotland@salvationarmy.org.uk',
+        wiki: 'https://en.wikipedia.org/wiki/The_Salvation_Army',
+        url: 'https://www.salvationarmy.org.uk/pleasance-lifehouse',
+        twitter: '@salvationarmyuk',
+        males: true,
+        females: false,
+        minAge: 18,
+        maxAge: 70,
         pets: false,
         active: true
     },{
