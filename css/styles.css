@@ -97,3 +97,29 @@ Title positioned to be marginally overlapping the box
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+/*
+This was designed from the ground up to be a single page app with an interface panel
+small enough to work on most smartphones without modification.
+The following breakpoint is for tiny screens
+*/
+@media (max-width: 300px) {
+    h1 {
+        font-size: 2em;
+    }
+    h2 {
+        font-size: 1.7em;
+    }
+    h1 {
+        font-size: 1.5em;
+    }
+    #box {
+        position: absolute;
+        top: 35px;
+        left: 0px;
+        padding: 0px;
+    }
+    .hideable {
+        display: none;
+    }
+}

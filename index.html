@@ -30,7 +30,7 @@
     <br>
 
     <!--hostel list-->
-    <ul id="shelter-list" data-bind="foreach: filteredShelters">
+    <ul class="hideable" id="shelter-list" data-bind="foreach: filteredShelters">
         <li id="clickable" data-bind="text: title, click: $parent.showLabel"></li>
     </ul>
 
@@ -40,7 +40,7 @@
     <span style="float: right;">&nbsp;</span>
 
     <!--more/less info button to normally hid the pointless wiki api results-->
-    <button id="wiki" data-bind="visible: !verbose(),
+    <button class="hideable" id="wiki" data-bind="visible: !verbose(),
     click: function() { more(true) }">Wikipedia the above</button>
     <button id="wiki" data-bind="visible: verbose,
     click: function() { more(false) }">
