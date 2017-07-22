@@ -74,7 +74,12 @@ var initMap = function() {
             this.setIcon(normMarker);
         });
     });
+
     map.fitBounds(bounds);
+
+    google.maps.event.addDomListener(window, 'resize', function() {
+        map.fitBounds(bounds); // `bounds` is a `LatLngBounds` object
+    });
 };
 
 // define infowindow with name, address phone number & links
