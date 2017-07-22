@@ -61,7 +61,8 @@ var viewModel = function() {
 
     self.maleShelters = ko.computed(function () {
        if(!self.maleFilter()) {
-           return ko.utils.arrayFilter(self.shelterlist(), function(hostel) {
+           return ko.utils.arrayFilter(self.shelterlist(),
+               function(hostel) {
                var filtered = hostel.active === true;
                if (hostel.marker) {
                    hostel.marker.setVisible(filtered);
@@ -70,7 +71,8 @@ var viewModel = function() {
            });
            // return self.shelterlist();
        } else {
-           return ko.utils.arrayFilter(self.shelterlist(), function(hostel) {
+           return ko.utils.arrayFilter(self.shelterlist(),
+               function(hostel) {
                 var filtered = hostel.males === self.maleFilter();
                 if (hostel.marker) {
                     hostel.marker.setVisible(filtered);
@@ -82,7 +84,8 @@ var viewModel = function() {
 
     self.femaleShelters = ko.computed(function () {
         if(!self.femaleFilter()) {
-            return ko.utils.arrayFilter(self.maleShelters(), function(hostel) {
+            return ko.utils.arrayFilter(self.maleShelters(),
+                function(hostel) {
                 var filtered = hostel.active === true;
                 if (hostel.marker) {
                     hostel.marker.setVisible(filtered);
@@ -91,7 +94,8 @@ var viewModel = function() {
             });
             // return self.maleShelters();
         } else {
-            return ko.utils.arrayFilter(self.maleShelters(), function(hostel) {
+            return ko.utils.arrayFilter(self.maleShelters(),
+                function(hostel) {
                 var filtered = hostel.females === self.femaleFilter();
                 if (hostel.marker) {
                     hostel.marker.setVisible(filtered);
@@ -103,7 +107,8 @@ var viewModel = function() {
 
     self.petShelters = ko.computed(function () {
         if(!self.petFilter()) {
-            return ko.utils.arrayFilter(self.femaleShelters(), function(hostel) {
+            return ko.utils.arrayFilter(self.femaleShelters(),
+                function(hostel) {
                 var filtered = hostel.active === true;
                 if (hostel.marker) {
                     hostel.marker.setVisible(filtered);
@@ -112,7 +117,8 @@ var viewModel = function() {
             });
             // return self.femaleShelters();
         } else {
-            return ko.utils.arrayFilter(self.femaleShelters(), function(hostel) {
+            return ko.utils.arrayFilter(self.femaleShelters(),
+                function(hostel) {
                 var filtered = hostel.pets === self.petFilter();
                 if (hostel.marker) {
                     hostel.marker.setVisible(filtered);
@@ -124,7 +130,8 @@ var viewModel = function() {
 
     self.filteredShelters = ko.computed(function () {
         if(!self.age()) {
-            return ko.utils.arrayFilter(self.petShelters(), function(hostel) {
+            return ko.utils.arrayFilter(self.petShelters(),
+                function(hostel) {
                 var filtered = hostel.active === true;
                 if (hostel.marker) {
                     hostel.marker.setVisible(filtered);
@@ -133,8 +140,10 @@ var viewModel = function() {
             });
             // return self.petShelters();
         } else {
-            return ko.utils.arrayFilter(self.petShelters(), function(hostel) {
-                var filtered = hostel.minAge <= self.age() && hostel.maxAge >= self.age();
+            return ko.utils.arrayFilter(self.petShelters(),
+                function(hostel) {
+                var filtered = hostel.minAge <= self.age()
+                    && hostel.maxAge >= self.age();
                 if (hostel.marker) {
                     hostel.marker.setVisible(filtered);
                 }
@@ -143,26 +152,9 @@ var viewModel = function() {
         }
     });
 
-    // prior attempt at itterative filtering:
-    // var filterSet = ko.observableArray([
-    //     self.maleFilter()
-    // ]);
-    //
-    // self.filteredShelters = ko.computed(function() {
-    //     var currentList = self.shelterList();
-    //     var currentFilters = self.filterSet();
-    //
-    //     ko.utils.arrayForEach(currentFilters, function () {
-    //         currentList = ko.utils.arrayFilter(currentList, function(filter) {
-    //             return app.utils.inArray(filter, currentFilters);
-    //         });
-    //     });
-    //
-    //     return currentList;
-    // });
-
     self.showLabel = function(hostel) {
         google.maps.event.trigger(hostel.marker, "click");
+        self.wikiSearch(hostel.title);
     };
 
     self.verbose = ko.observable(false);
@@ -204,8 +196,6 @@ var viewModel = function() {
             }
         });
     };
-
-    self.wikio = ko.observable(this.wiki);
 };
 
 var initMap = function() {
@@ -213,7 +203,8 @@ var initMap = function() {
         center: {lat:  55.953252, lng: -3.188267},
         zoom: 13,
         styles: styles,
-        mapTypeControl: true,   // https://developers.google.com/maps/documentation/javascript/controls
+        // https://developers.google.com/maps/documentation/javascript/controls
+        mapTypeControl: true,
         mapTypeControlOptions: {
             style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
             position: google.maps.ControlPosition.LEFT_BOTTOM
@@ -225,14 +216,15 @@ var initMap = function() {
     var bounds = new google.maps.LatLngBounds();
 
     var normMarker = {
-        path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,  // https://www.tutorialspoint.com/google_maps/google_maps_symbols.htm
+        // https://www.tutorialspoint.com/google_maps/google_maps_symbols.htm
+        path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
         scale: 5,
         strokeWeight: 3,
         strokeColor: "#ea3323"
     };
 
     var boldMarker = {
-        path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,  // https://www.tutorialspoint.com/google_maps/google_maps_symbols.htm
+        path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
         scale: 5,
         strokeWeight: 3,
         strokeColor: "#ea3323",
@@ -274,19 +266,20 @@ var initMap = function() {
 };
 
 function populateInfoWindow(marker, infowindow) {
-    // Check to make sure the infowindow is not already opened on this marker.
+    // Check infowindow is not already open on this marker.
     if (infowindow.marker !== marker) {
         infowindow.marker = marker;
         infowindow.setContent(
             '<div><strong>' + marker.title + '</strong></div>'
             + '<div>&#9659; ' + marker.address + '</div>'
             + '<div>&#9659; ' + marker.phone + '</div>'
-            + '<a href="mailto:' + marker.email + '?Subject=HomePointr%20enquiry">Email</a>'
+            + '<a href="mailto:' + marker.email
+            + '?Subject=HomePointr%20enquiry">Email</a>'
             + ' | <a href="' + marker.url + '" target="_blank">Website</a>'
             + ' | <a href="' + marker.wiki + '" target="_blank">Wikipedia</a>'
         );
         infowindow.open(map, marker);
-        // Make sure the marker property is cleared if the infowindow is closed.
+        // Clear marker if infowindow is closed.
         infowindow.addListener('closeclick',function(){
             infowindow.setMarker = null;
         });
