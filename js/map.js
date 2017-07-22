@@ -63,6 +63,7 @@ var initMap = function() {
             populateInfoWindow(this, largeInfowindow);
             marker.setAnimation(google.maps.Animation.BOUNCE);
             setTimeout(function(){ marker.setAnimation(null); }, 700);
+            vm.wikiSearch(shelter.title);
         });
 
         // fill in markers on mouse-over & empty again on mouse-out
