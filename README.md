@@ -6,7 +6,7 @@ https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004)
 - Martin Currie (Aqueum) - 7 July 2017
 
 # Purpose & design
-This is a singe page web app that helps homeless people find somewhere to sleep in Edinburgh.
+A web app to help homeless people find somewhere to sleep in Edinburgh.
 It is also an assessed project, hence some of the functionality (& certainly the use of KnockoutJS) was dictated by
 this [project specification](https://review.udacity.com/#!/rubrics/17/view)
 
@@ -17,18 +17,24 @@ this [project specification](https://review.udacity.com/#!/rubrics/17/view)
 please [contact me](http://www.aqueum.com/contact/)
 
 # Known issues
-## Not built
-At time of writing, I'm still in planning stages, so none of the following files exist, hence it probably won't work.
+## Distracting API results
+The rubric requires use of a second API.  Other than Twitter (which requires TLS), I couldn't find any public APIs that would generate real value. So I have left it with a wikipedia serarch based on the hostel name.  This may be useful in development mode if the app was expanded to cover hundeds of hostels, but currently seems an irrelevant distraction.
 
 # Files
 ## index.html
 The html file that is served as the initial view, which calls app.js which does most of the heavy lifting
 
 ## js/app.js
-The bulk of the app, initially including:
-- the data (in the future this will be moved to a database)
-- the ViewModel which controls what you see & how you interact with it
-- the
+Predominantly the ViewModel - most of the Knockout middleware.
+
+## js/map.js
+Predominantly initMap - the google map middleware
+
+## js/data.js
+The hardcoded input data, this would be respaced by a backend database in production.
+
+## js/style.js
+The verbose google map styles, created with snazzymaps.
 
 ## css/styles.css
 the cascading style sheets that make the html a little less ugly.

@@ -58,6 +58,10 @@ html, body {
     height: 100%;
 }
 
+#clickable, nav a, button {
+    cursor: pointer;
+}
+
 /*
 floating semi-transparrent box
 https://stackoverflow.com/questions/6037712/how-to-float-a-div-over-google-maps
