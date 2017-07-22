@@ -73,7 +73,7 @@ var viewModel = function() {
                if (hostel.marker) {
                    hostel.marker.setVisible(filtered);
                }
-               return filtered
+               return filtered;
            });
        } else {
            return ko.utils.arrayFilter(self.shelterlist(),
@@ -82,7 +82,7 @@ var viewModel = function() {
                 if (hostel.marker) {
                     hostel.marker.setVisible(filtered);
                 }
-                return filtered
+                return filtered;
            });
        }
     });
@@ -95,7 +95,7 @@ var viewModel = function() {
                 if (hostel.marker) {
                     hostel.marker.setVisible(filtered);
                 }
-                return filtered
+                return filtered;
             });
         } else {
             return ko.utils.arrayFilter(self.maleShelters(),
@@ -104,7 +104,7 @@ var viewModel = function() {
                 if (hostel.marker) {
                     hostel.marker.setVisible(filtered);
                 }
-                return filtered
+                return filtered;
             });
         }
     });
@@ -117,7 +117,7 @@ var viewModel = function() {
                 if (hostel.marker) {
                     hostel.marker.setVisible(filtered);
                 }
-                return filtered
+                return filtered;
             });
         } else {
             return ko.utils.arrayFilter(self.femaleShelters(),
@@ -126,7 +126,7 @@ var viewModel = function() {
                 if (hostel.marker) {
                     hostel.marker.setVisible(filtered);
                 }
-                return filtered
+                return filtered;
             });
         }
     });
@@ -139,17 +139,16 @@ var viewModel = function() {
                 if (hostel.marker) {
                     hostel.marker.setVisible(filtered);
                 }
-                return filtered
+                return filtered;
             });
         } else {
             return ko.utils.arrayFilter(self.petShelters(),
                 function(hostel) {
-                var filtered = hostel.minAge <= self.age()
-                    && hostel.maxAge >= self.age();
+                var filtered = hostel.minAge <= self.age() && hostel.maxAge >= self.age();
                 if (hostel.marker) {
                     hostel.marker.setVisible(filtered);
                 }
-                return filtered
+                return filtered;
             });
         }
     });
