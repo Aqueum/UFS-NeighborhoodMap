@@ -173,13 +173,6 @@ var ViewModel = function() {
     self.wikiSearch = function (searchstring) {
 
         var wikipediaEndPointUrl = "https://en.wikipedia.org/w/api.php";
-        var wikiRequestTimeout = setTimeout(function(){
-            self.wikiData.push(new wikiDatum({
-                wikiTitle: 'Wikipedia timed out with no results',
-                wikiInfo: '',
-                wikiURL: ''
-            }));
-        }, 4000);
         $.ajax({
             url: wikipediaEndPointUrl,
             data: {
@@ -197,10 +190,44 @@ var ViewModel = function() {
                         wikiURL: response[3][article]
                     }));
                 }
-                clearTimeout(wikiRequestTimeout);
             }
+        }).fail(function (jqXHR, textStatus) {
+            self.wikiData.push(new wikiDatum({
+                wikiTitle: 'Wikipedia timed out with no results',
+                wikiInfo: '',
+                wikiURL: ''
+            }));
         });
     };
+
+    // tried this, but uncaught reference errors
+    // var wikipediaEndPointUrl = "https://en.wikipedia.org/w/api.php";
+    // $.ajax({
+    //     url: wikipediaEndPointUrl,
+    //     data: {
+    //         "action": "opensearch",
+    //         "search": searchstring,
+    //         "format": "json"
+    //     },
+    //     dataType: "jsonp"
+    // }).done(function (data) {
+    //     self.wikiData([]); // reset wikiData at start of search
+    //     for (var article=0; article < response[1].length; article++) {
+    //         self.wikiData.push(new wikiDatum({
+    //             wikiTitle: response[1][article],
+    //             wikiInfo: response[2][article],
+    //             wikiURL: response[3][article]
+    //         }));
+    //     }
+    // }).fail(function (jqXHR, textStatus) {
+    //     self.wikiData.push(new wikiDatum({
+    //         wikiTitle: 'Wikipedia timed out with no results',
+    //         wikiInfo: '',
+    //         wikiURL: ''
+    //     }));
+    // });
+// };
+
 };
 
 var vm = new ViewModel();
