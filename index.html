@@ -51,10 +51,11 @@
     </button>
     <div data-bind="visible: verbose">
         <br>
+        <a data-bind="attr: { href: wikiArticle }">Most relevant wikipedia article</a>
         <!--pointless wikipedia api results-->
         <div class="wiki" data-bind="visible: wikiData().length > 0">
             <br>
-            <span>Possible wikipedia articles:</span>
+            <span>Other possible wikipedia articles:</span>
             <ol data-bind="foreach: wikiData">
                 <li><a data-bind="text: wikiTitle,
                     attr: { href: wikiURL }"></a></li>
