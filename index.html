@@ -49,15 +49,15 @@
     <div data-bind="visible: verbose">
         <br>
         <!--pointless wikipedia api results-->
-        <div class="wiki" data-bind="visible: wikidata().length > 0">
+        <div class="wiki" data-bind="visible: wikiData().length > 0">
             <br>
             <span>Possible wikipedia articles:</span>
-            <ol data-bind="foreach: wikidata">
+            <ol data-bind="foreach: wikiData">
                 <li><a data-bind="text: wikiTitle,
                 attr: { href: wikiURL }"></a></li>
             </ol>
         </div>
-        <div class="wiki" data-bind="visible: wikidata().length <= 0">
+        <div class="wiki" data-bind="visible: wikiData().length <= 0">
             <br>
             <span>No wikipedia articles found</span>
         </div>
