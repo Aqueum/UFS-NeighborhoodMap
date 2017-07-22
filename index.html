@@ -51,9 +51,9 @@
             Most relevant wikipedia article
         </a>
         <!--pointless wikipedia api results-->
-        <div data-bind="visible: wikidata().length > 0">
+        <div id="wiki" data-bind="visible: wikidata().length > 0">
             <br>
-            <span>Possible wikipedia articles</span>
+            <span>Possible other wikipedia articles</span>
             <ol data-bind="foreach: wikidata">
                 <li><a data-bind="text: wikiTitle,
                 attr: { href: wikiURL }"></a></li>
