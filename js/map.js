@@ -62,7 +62,7 @@ var initMap = function() {
         marker.addListener('click', function() {
             populateInfoWindow(this, largeInfowindow);
             marker.setAnimation(google.maps.Animation.BOUNCE);
-            setTimeout(function(){ marker.setAnimation(null); }, 400);
+            setTimeout(function(){ marker.setAnimation(null); }, 700);
         });
 
         // fill in markers on mouse-over & empty again on mouse-out
