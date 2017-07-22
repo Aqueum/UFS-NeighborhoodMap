@@ -167,7 +167,6 @@ var viewModel = function() {
 
     self.more = function(answer) {
         self.verbose(answer);
-        console.log(self.wikiArticle())
     };
 
     self.wikidata = ko.observableArray([]);
