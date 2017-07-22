@@ -99,3 +99,7 @@ function populateInfoWindow(marker, infowindow) {
         });
     }
 }
+
+function googleErrorHandler() {
+    alert("GOOGLE MAPS WON'T LOAD\nWell this is embarrasing...\nPlease check your internet connection and try again\nIf ths error persists please contact us:\nwebmaster@HomePointr.com")
+}
