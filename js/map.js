@@ -94,10 +94,10 @@ function populateInfoWindow(marker, infowindow) {
             + '<a href="mailto:' + marker.email
             + '?Subject=HomePointr%20enquiry">Email</a>'
             + ' | <a href="' + marker.url + '" target="_blank">Website</a>'
-            + ' | <a href="' + marker.wiki + '" target="_blank">Wikipedia</a>'
-
+            + ' | <button id="infobutton" data-bind="click: function() { more(true) }">Wikipedia</button>'
         );
         infowindow.open(map, marker);
+        ko.applyBindings(vm, document.getElementById('infobutton'));
         // Clear marker if infowindow is closed.
         infowindow.addListener('closeclick',function(){
             infowindow.setMarker = null;
