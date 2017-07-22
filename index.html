@@ -8,8 +8,19 @@
     <meta name="viewport" content="initial-scale=1.0">
 </head>
 <body>
+
+<!--background map-->
 <div id="map"></div>
+
+<!--Title block-->
+<div id="title">
+    <h1>HomePointr</h1>
+</div>
+
+<!--floating data box-->
 <div id="box">
+
+    <!--filter set, to input age, gender(s) & whether you have a pet-->
     <span>Point me to a hostel for a: </span><br>
     <input id="age" data-bind="value: age, valueAllowUnset: true"/>
     <span>yr old</span>
@@ -17,33 +28,42 @@
     <button data-bind="click: function() { takeFemales(true) }">Woman</button>
     <button data-bind="click: function() { takePets(true) }">+ Pet</button>
     <br>
+
+    <!--hostel list-->
     <ul id="shelter-list" data-bind="foreach: filteredShelters">
         <li data-bind="text: title, click: $parent.showLabel"></li>
     </ul>
+
+    <!--filter reset - to get whole list-->
     <button data-bind="click: function() { reset() }"
             style="float: right;">Reset</button>
     <span style="float: right;">&nbsp;</span>
-    <button data-bind="visible: !verbose(), click: function() { more(true) }"
-            style="float: right;">More Info</button>
-    <button data-bind="visible: verbose, click: function() { more(false) }"
-            style="float: right;">Less Info</button>
+
+    <!--more/less info button to normally hid the pointless wiki api results-->
+    <!--<button data-bind="visible: !verbose(), click: function() { more(true) }"-->
+            <!--style="float: right;">More Info</button>-->
+    <button data-bind="visible: verbose, click: function() { more(false) }">
+        Lose the wikipedia links
+    </button>
     <div data-bind="visible: verbose">
+        <br>
+        <a data-bind="attr: { href: wikiArticle() }">
+            Most relevant wikipedia article
+        </a>
+        <!--pointless wikipedia api results-->
         <div data-bind="visible: wikidata().length > 0">
             <br>
-            <br>
-            <br>
-            <span>Irrelevant wikipedia articles</span>
+            <span>Possible wikipedia articles</span>
             <ol data-bind="foreach: wikidata">
                 <li><a data-bind="text: wikiTitle,
                 attr: { href: wikiURL }"></a></li>
             </ol>
         </div>
-    </div>
-</div>
-<div id="title">
-    <h1>HomePointr</h1>
+
+    </a>
 </div>
 
+<!--imports-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 </script>
 <script src="js/lib/knockout-3.4.2.js"></script>

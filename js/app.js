@@ -2,6 +2,7 @@
  * Created by Martin Currie (https://github.com/Aqueum) on 07/07/2017.
  */
 
+// data import
 var Shelter = function(data) {
     this.title = data.title;
     this.location = data.location;
@@ -19,25 +20,31 @@ var Shelter = function(data) {
     this.active = data.active;
 };
 
+// wikipedia results
 var wikidatum = function(data) {
     this.wikiTitle = data.wikiTitle;
     this.wikiInfo = data.wikiInfo;
     this.wikiURL = data.wikiURL;
 };
 
+// Knockout JS' (MVVM) ViewModel
 var viewModel = function() {
     var self = this;
 
+    // initialise & populate list of hostels
     self.shelterlist = ko.observableArray([]);
 
     shelters.forEach(function(data){
         self.shelterlist.push( new Shelter(data));
     });
 
-    self.maleFilter = ko.observable(); // property to store the filter
-    self.femaleFilter = ko.observable(); // property to store the filter
-    self.petFilter = ko.observable(); // property to store the filter
+    // initialise properties to store the filters
+    self.maleFilter = ko.observable();
+    self.femaleFilter = ko.observable();
+    self.petFilter = ko.observable();
+    self.age = ko.observable("");
 
+    // filter function calls
     self.takeMales = function (answer) {
         self.maleFilter(answer);
     };
@@ -50,8 +57,6 @@ var viewModel = function() {
         self.petFilter(answer);
     };
 
-    self.age = ko.observable("");
-
     self.reset = function () {
         self.takeMales();
         self.takeFemales();
@@ -59,6 +64,7 @@ var viewModel = function() {
         self.age(null);
     };
 
+    // filter application cascade
     self.maleShelters = ko.computed(function () {
        if(!self.maleFilter()) {
            return ko.utils.arrayFilter(self.shelterlist(),
@@ -69,7 +75,6 @@ var viewModel = function() {
                }
                return filtered
            });
-           // return self.shelterlist();
        } else {
            return ko.utils.arrayFilter(self.shelterlist(),
                function(hostel) {
@@ -92,7 +97,6 @@ var viewModel = function() {
                 }
                 return filtered
             });
-            // return self.maleShelters();
         } else {
             return ko.utils.arrayFilter(self.maleShelters(),
                 function(hostel) {
@@ -115,7 +119,6 @@ var viewModel = function() {
                 }
                 return filtered
             });
-            // return self.femaleShelters();
         } else {
             return ko.utils.arrayFilter(self.femaleShelters(),
                 function(hostel) {
@@ -138,7 +141,6 @@ var viewModel = function() {
                 }
                 return filtered
             });
-            // return self.petShelters();
         } else {
             return ko.utils.arrayFilter(self.petShelters(),
                 function(hostel) {
@@ -152,6 +154,10 @@ var viewModel = function() {
         }
     });
 
+    self.wikiArticle = ko.observable(self.wiki);
+
+    // event listener to trigger marker clicks when list clicked
+    // & run pointless wikipedia api search
     self.showLabel = function(hostel) {
         google.maps.event.trigger(hostel.marker, "click");
         self.wikiSearch(hostel.title);
@@ -161,6 +167,7 @@ var viewModel = function() {
 
     self.more = function(answer) {
         self.verbose(answer);
+        console.log(self.wikiArticle())
     };
 
     self.wikidata = ko.observableArray([]);
@@ -276,9 +283,12 @@ function populateInfoWindow(marker, infowindow) {
             + '<a href="mailto:' + marker.email
             + '?Subject=HomePointr%20enquiry">Email</a>'
             + ' | <a href="' + marker.url + '" target="_blank">Website</a>'
-            + ' | <a href="' + marker.wiki + '" target="_blank">Wikipedia</a>'
+            //+ ' | <a href="' + marker.wiki + '" target="_blank">Wikipedia</a>'
+            + ' | <button id="infobutton" ' +
+            'data-bind="click: function() { more(true) }" >Wikipedia</button>'
         );
         infowindow.open(map, marker);
+        ko.applyBindings(vm, document.getElementById('infobutton'))
         // Clear marker if infowindow is closed.
         infowindow.addListener('closeclick',function(){
             infowindow.setMarker = null;

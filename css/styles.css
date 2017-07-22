@@ -1,14 +1,16 @@
+/* Mobile optimisation */
 img, embed, object, video {
     max-width: 100%;
 }
 
+/* large tap targets */
 nav a, button {
     min-width: 48px;
     min-height: 48px;
 }
 
 
-/* Text */
+/* Text formatting */
 * {
     font: 100%/1.2 "Verdana", "Helvetica", "Arial", sans-serif;
     color: #237;
@@ -53,6 +55,7 @@ html, body {
 }
 
 /*
+floating semi-transparrent box
 https://stackoverflow.com/questions/6037712/how-to-float-a-div-over-google-maps
 Filter user for IE8 and earlier
 (https://www.w3schools.com/css/tryit.asp?filename=trycss_transparency)
@@ -61,7 +64,7 @@ Filter user for IE8 and earlier
     position: absolute;
     top: 78px;
     left: 20px;
-    z-index: 99;
+    z-index: 98;
     background-color: #fff7f0;
     opacity: 0.7;
     filter: alpha(opacity=70);
@@ -69,7 +72,7 @@ Filter user for IE8 and earlier
 }
 
 /*
-https://stackoverflow.com/questions/6037712/how-to-float-a-div-over-google-maps
+Title positioned to be marginally overlapping the box
 */
 #title {
     position: absolute;
@@ -84,5 +87,5 @@ https://stackoverflow.com/questions/6037712/how-to-float-a-div-over-google-maps
 
 #shelter-list{
     margin-top: 10px;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
 }
