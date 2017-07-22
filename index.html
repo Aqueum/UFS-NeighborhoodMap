@@ -53,7 +53,7 @@
         <!--pointless wikipedia api results-->
         <div id="wiki" data-bind="visible: wikidata().length > 0">
             <br>
-            <span>Possible other wikipedia articles</span>
+            <span>Possible other wikipedia articles:</span>
             <ol data-bind="foreach: wikidata">
                 <li><a data-bind="text: wikiTitle,
                 attr: { href: wikiURL }"></a></li>
@@ -69,6 +69,7 @@
 <script src="js/lib/knockout-3.4.2.js"></script>
 <script src="js/data.js"></script>
 <script src="js/styles.js"></script>
+<script src="js/map.js"></script>
 <script src="js/app.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyCUqFBJkQPW0zQHlQr62QJsd8I1ni1DXTY&v=3&callback=initMap"
         async defer></script>
