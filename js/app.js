@@ -19,6 +19,12 @@ var Shelter = function(data) {
     this.active = data.active;
 };
 
+var wikidatum = function(data) {
+    this.wikiTitle = data.wikiTitle;
+    this.wikiInfo = data.wikiInfo;
+    this.wikiURL = data.wikiURL;
+};
+
 var viewModel = function() {
     var self = this;
 
@@ -156,13 +162,50 @@ var viewModel = function() {
     // });
 
     self.showLabel = function(hostel) {
-        google.maps.event.trigger(hostel.marker, "click")
-        // wikiData(hostel.title)
-    }
-
-    self.wikibox = function () {
-        console.log("someone wants wikipedia")
+        google.maps.event.trigger(hostel.marker, "click");
     };
+
+    self.verbose = ko.observable(false);
+
+    self.more = function(answer) {
+        self.verbose(answer);
+    };
+
+    self.wikidata = ko.observableArray([]);
+
+    self.wikiSearch = function (searchstring) {
+
+        var wikipediaEndPointUrl = "https://en.wikipedia.org/w/api.php";
+        var wikiRequestTimeout = setTimeout(function(){
+            self.wikidata.push(new wikidatum({
+                wikiTitle: 'Wikipedia timed out with no results',
+                wikiInfo: '',
+                wikiURL: ''
+            }));
+        }, 4000);
+        $.ajax({
+            url: wikipediaEndPointUrl,
+            data: {
+                "action": "opensearch",
+                "search": searchstring,
+                "format": "json"
+            },
+            dataType: "jsonp",
+            success: function (response) {
+                self.wikidata([]); // reset wikidata at start of search
+                for (var article=0; article < response[1].length; article++) {
+                    self.wikidata.push(new wikidatum({
+                        wikiTitle: response[1][article],
+                        wikiInfo: response[2][article],
+                        wikiURL: response[3][article]
+                    }));
+                }
+                clearTimeout(wikiRequestTimeout);
+            }
+        });
+    };
+
+    self.wikio = ko.observable(this.wiki);
 };
 
 var initMap = function() {
@@ -240,7 +283,7 @@ function populateInfoWindow(marker, infowindow) {
             + '<div>&#9659; ' + marker.phone + '</div>'
             + '<a href="mailto:' + marker.email + '?Subject=HomePointr%20enquiry">Email</a>'
             + ' | <a href="' + marker.url + '" target="_blank">Website</a>'
-            + ' | <button data-bind="click: function() { wikibox() }">Wikipedia</button>'
+            + ' | <a href="' + marker.wiki + '" target="_blank">Wikipedia</a>'
         );
         infowindow.open(map, marker);
         // Make sure the marker property is cleared if the infowindow is closed.
@@ -249,40 +292,6 @@ function populateInfoWindow(marker, infowindow) {
         });
     }
 }
-
-// NEED TO DE-AJAX THIS
-// function wikiData(searchstring) {
-//
-//     var $wikiElem = $('#wikipedia-links');
-//
-//     // clear out old data before new request
-//     $wikiElem.text("");
-//
-//     var wikipediaEndPointUrl = "https://en.wikipedia.org/w/api.php";
-//     var wikiRequestTimeout = setTimeout(function(){ $wikiElem.text("failed to get wikipedia resources");}, 4000);
-//     $.ajax({
-//         url: wikipediaEndPointUrl,
-//         data: {
-//             "action": "opensearch",
-//             "search": searchstring,
-//             "format": "json",
-//         },
-//         dataType: "jsonp",
-//         success: function (response) {
-//             linkDisplays = response[1];
-//             links = response[3];
-//             var articles = [];
-//             for (var index = 0; index < response[1].length; index++) {
-//                 articles.push(
-//                     "<li><a href=" + '"' + links[index] + '"' + ">" + linkDisplays[index] + "</a></li>");
-//             }
-//             $wikiElem.append(articles);
-//             clearTimeout(wikiRequestTimeout);
-//         }
-//     });
-//
-//     return false;
-// };
 
 var vm = new viewModel();
 ko.applyBindings(vm);

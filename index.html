@@ -21,9 +21,20 @@
         <li data-bind="text: title, click: $parent.showLabel"></li>
     </ul>
     <button data-bind="click: function() { reset() }" style="float: right;">Reset</button>
-    <!--<br>-->
-    <!--<p>Irrelevant wikipedia articles</p>-->
-    <!--<ol id="wikipedia-links"></ol>-->
+    <span style="float: right;">&nbsp;</span>
+    <button data-bind="visible: !verbose(), click: function() { more(true) }" style="float: right;">More Info</button>
+    <button data-bind="visible: verbose, click: function() { more(false) }" style="float: right;">Less Info</button>
+    <div data-bind="visible: verbose">
+        <div data-bind="visible: wikidata().length > 0">
+            <br>
+            <br>
+            <br>
+            <span>Irrelevant wikipedia articles</span>
+            <ol data-bind="foreach: wikidata">
+                <li><a data-bind="text: wikiTitle, attr: { href: wikiURL }"></a></li>
+            </ol>
+        </div>
+    </div>
 </div>
 <div id="title">
     <h1>HomePointr</h1>
