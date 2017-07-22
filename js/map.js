@@ -53,6 +53,7 @@ var initMap = function() {
 
         bounds.extend(marker.position);
 
+        // https://stackoverflow.com/questions/7339200/bounce-a-pin-in-google-maps-once
         marker.addListener('click', function() {
             populateInfoWindow(this, largeInfowindow);
             marker.setAnimation(google.maps.Animation.BOUNCE);
