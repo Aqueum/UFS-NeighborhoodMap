@@ -21,7 +21,7 @@ var Shelter = function(data) {
 };
 
 // wikipedia results
-var wikidatum = function(data) {
+var wikiDatum = function(data) {
     this.wikiTitle = data.wikiTitle;
     this.wikiInfo = data.wikiInfo;
     this.wikiURL = data.wikiURL;
@@ -168,13 +168,13 @@ var viewModel = function() {
         self.verbose(answer);
     };
 
-    self.wikidata = ko.observableArray([]);
+    self.wikiData = ko.observableArray([]);
 
     self.wikiSearch = function (searchstring) {
 
         var wikipediaEndPointUrl = "https://en.wikipedia.org/w/api.php";
         var wikiRequestTimeout = setTimeout(function(){
-            self.wikidata.push(new wikidatum({
+            self.wikiData.push(new wikiDatum({
                 wikiTitle: 'Wikipedia timed out with no results',
                 wikiInfo: '',
                 wikiURL: ''
@@ -189,9 +189,9 @@ var viewModel = function() {
             },
             dataType: "jsonp",
             success: function (response) {
-                self.wikidata([]); // reset wikidata at start of search
+                self.wikiData([]); // reset wikiData at start of search
                 for (var article=0; article < response[1].length; article++) {
-                    self.wikidata.push(new wikidatum({
+                    self.wikiData.push(new wikiDatum({
                         wikiTitle: response[1][article],
                         wikiInfo: response[2][article],
                         wikiURL: response[3][article]
