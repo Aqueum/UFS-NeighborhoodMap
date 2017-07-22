@@ -84,7 +84,7 @@ Title positioned to be marginally overlapping the box
 */
 #title {
     position: absolute;
-    top: 0px;
+    top: 0;
     left: 25px;
     z-index: 99;
 }
@@ -116,8 +116,8 @@ The following breakpoint is for tiny screens
     #box {
         position: absolute;
         top: 35px;
-        left: 0px;
-        padding: 0px;
+        left: 0;
+        padding: 0;
     }
     .hideable {
         display: none;
