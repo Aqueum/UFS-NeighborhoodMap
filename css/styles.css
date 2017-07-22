@@ -93,9 +93,13 @@ Title positioned to be marginally overlapping the box
     width: 20px;
 }
 
-#shelter-list{
+#shelter-list {
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.right {
+    float: right;
 }
 
 /*

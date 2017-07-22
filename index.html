@@ -37,9 +37,10 @@
     </ul>
 
     <!--filter reset - to get whole list-->
-    <button data-bind="click: function() { reset() }"
-            style="float: right;">Reset</button>
-    <span style="float: right;">&nbsp;</span>
+    <button class="right" data-bind="click: function() { reset() }">
+        Reset
+    </button>
+    <span class="right">&nbsp;</span>
 
     <!--more/less info button to normally hid the pointless wiki api results-->
     <button class="hideable wiki" data-bind="visible: !verbose(),
