@@ -51,6 +51,7 @@
     </button>
     <div data-bind="visible: verbose">
         <br>
+        <!--Link to the hardcoded wikipedia link from wiki: in data.js's shelters-->
         <a data-bind="attr: { href: wikiArticle }">Most relevant wikipedia article</a>
         <!--pointless wikipedia api results-->
         <div class="wiki" data-bind="visible: wikiData().length > 0">
