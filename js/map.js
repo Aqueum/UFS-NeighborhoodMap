@@ -94,7 +94,6 @@ function populateInfoWindow(marker, infowindow) {
             + '<a href="mailto:' + marker.email
             + '?Subject=HomePointr%20enquiry">Email</a>'
             + ' | <a href="' + marker.url + '" target="_blank">Website</a>'
-            + ' | <a href="' + marker.wiki + '" target="_blank">Wikipedia</a>'
 
         );
         infowindow.open(map, marker);

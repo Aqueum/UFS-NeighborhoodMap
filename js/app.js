@@ -20,13 +20,6 @@ var Shelter = function(data) {
     this.active = data.active;
 };
 
-// wikipedia results
-var wikiDatum = function(data) {
-    this.wikiTitle = data.wikiTitle;
-    this.wikiInfo = data.wikiInfo;
-    this.wikiURL = data.wikiURL;
-};
-
 // Knockout JS' (MVVM) ViewModel
 var ViewModel = function() {
     var self = this;
@@ -153,50 +146,9 @@ var ViewModel = function() {
         }
     });
 
-    self.wikiArticle = ko.observable(self.wiki);
-
     // event listener to trigger marker clicks when list clicked
-    // & run pointless wikipedia api search
     self.showLabel = function(hostel) {
         google.maps.event.trigger(hostel.marker, "click");
-        self.wikiSearch(hostel.title);
-    };
-
-    self.verbose = ko.observable(false);
-
-    self.more = function(answer) {
-        self.verbose(answer);
-    };
-
-    self.wikiData = ko.observableArray([]);
-
-    self.wikiSearch = function (searchstring) {
-
-        var wikipediaEndPointUrl = "https://en.wikipedia.org/w/api.php";
-        $.ajax({
-            url: wikipediaEndPointUrl,
-            data: {
-                "action": "opensearch",
-                "search": searchstring,
-                "format": "json"
-            },
-            dataType: "jsonp"
-        }).done(function (response) {
-            self.wikiData([]); // reset wikiData at start of search
-            for (var article=0; article < response[1].length; article++) {
-                self.wikiData.push(new wikiDatum({
-                    wikiTitle: response[1][article],
-                    wikiInfo: response[2][article],
-                    wikiURL: response[3][article]
-                }));
-            }
-        }).fail(function (jqXHR, textStatus) {
-            self.wikiData.push(new wikiDatum({
-                wikiTitle: 'Wikipedia timed out with no results',
-                wikiInfo: '',
-                wikiURL: ''
-            }));
-        });
     };
 };
 

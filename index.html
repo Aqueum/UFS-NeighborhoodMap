@@ -40,37 +40,10 @@
     <button class="right" data-bind="click: function() { reset() }">
         Reset
     </button>
-    <span class="right">&nbsp;</span>
-
-    <!--more/less info button to normally hid the pointless wiki api results-->
-    <button class="hideable wiki" data-bind="visible: !verbose(),
-        click: function() { more(true) }">Wikipedia the above</button>
-    <button class="wiki" data-bind="visible: verbose,
-        click: function() { more(false) }">
-        Lose the wikipedia links
-    </button>
-    <div data-bind="visible: verbose">
-        <br>
-        <!--pointless wikipedia api results-->
-        <div class="wiki" data-bind="visible: wikiData().length > 0">
-            <br>
-            <span>Possible wikipedia articles:</span>
-            <ol data-bind="foreach: wikiData">
-                <li><a data-bind="text: wikiTitle,
-                    attr: { href: wikiURL }"></a></li>
-            </ol>
-        </div>
-        <div class="wiki" data-bind="visible: wikiData().length <= 0">
-            <br>
-            <span>No wikipedia articles found</span>
-        </div>
-    </div>
 
 </aside>
 
 <!--imports-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-</script>
 <script src="js/lib/knockout-3.4.2.js"></script>
 <script src="js/data.js"></script>
 <script src="js/styles.js"></script>
