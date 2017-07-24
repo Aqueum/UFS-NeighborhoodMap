@@ -158,19 +158,20 @@ var ViewModel = function() {
     // initialise properties to store the filters
     self.age = ko.observable("");
     self.genderOptions = ko.observableArray(['Male', 'Female']);
-    self.gender = ko.observable('Male');
+    self.gender = ko.observable();
     self.petOptions = ko.observableArray(['without pets', 'with a pet']);
-    self.pet = ko.observable('without pets');
-
-    self.reset = function () {
-        // self.takeMales();
-        // self.takeFemales();
-        // self.takePets();
-        self.age(null);
-    };
+    self.pet = ko.observable();
 
     self.genderFilteredShelters = ko.computed(function () {
-        if (self.gender() === 'Male') {
+        if(!self.gender()) {
+            return ko.utils.arrayFilter(self.shelterlist(), function(hostel) {
+                var filtered = hostel.active === true;
+                if (hostel.marker) {
+                    hostel.marker.setVisible(filtered);
+                }
+                return filtered;
+            });
+        } else if (self.gender() === 'Male') {
             return ko.utils.arrayFilter(self.shelterlist(), function (hostel) {
                 var filtered = hostel.males === true;
                 if (hostel.marker) {
@@ -185,14 +186,20 @@ var ViewModel = function() {
                     hostel.marker.setVisible(filtered);
                 }
                 return filtered;
-            });
-        } else {
-            return self.shelterlist()
+            })
         }
     });
 
-    self.filteredShelters = ko.computed(function () {
-        if (self.pet() === 'with a pet') {
+    self.petFilteredShelters = ko.computed(function () {
+        if(!self.pet()) {
+            return ko.utils.arrayFilter(self.genderFilteredShelters(), function(hostel) {
+                var filtered = hostel.active === true;
+                if (hostel.marker) {
+                    hostel.marker.setVisible(filtered);
+                }
+                return filtered;
+            });
+        } else if (self.pet() === 'with a pet') {
             return ko.utils.arrayFilter(self.genderFilteredShelters(), function (hostel) {
                 var filtered = hostel.pets === true;
                 if (hostel.marker) {
@@ -200,8 +207,35 @@ var ViewModel = function() {
                 }
                 return filtered;
             });
+        } else if (self.pet() === 'without pets') {
+            return ko.utils.arrayFilter(self.genderFilteredShelters(), function (hostel) {
+                var filtered = hostel.active === true;
+                if (hostel.marker) {
+                    hostel.marker.setVisible(filtered);
+                }
+                return filtered;
+            });
+        }
+    });
+
+    self.filteredShelters = ko.computed(function () {
+        if(!self.age()) {
+            return ko.utils.arrayFilter(self.petFilteredShelters(), function(hostel) {
+                var filtered = hostel.active === true;
+                if (hostel.marker) {
+                    hostel.marker.setVisible(filtered);
+                }
+                return filtered;
+            });
         } else {
-            return self.genderFilteredShelters()
+            return ko.utils.arrayFilter(self.petFilteredShelters(),
+                function(hostel) {
+                    var filtered = hostel.minAge <= self.age() && hostel.maxAge >= self.age();
+                    if (hostel.marker) {
+                        hostel.marker.setVisible(filtered);
+                    }
+                    return filtered;
+                });
         }
     });
 
