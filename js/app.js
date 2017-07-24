@@ -204,6 +204,8 @@ var ViewModel = function() {
                 }
                 return filtered;
             });
+        } else {
+            return self.shelterlist()
         }
     });
 
