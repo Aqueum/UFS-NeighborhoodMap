@@ -156,28 +156,28 @@ var ViewModel = function() {
     });
 
     // initialise properties to store the filters
-    self.maleFilter = ko.observable();
-    self.femaleFilter = ko.observable();
-    self.petFilter = ko.observable();
+    // self.maleFilter = ko.observable();
+    // self.femaleFilter = ko.observable();
+    // self.petFilter = ko.observable();
     self.age = ko.observable("");
 
     // filter function calls
-    self.takeMales = function (answer) {
-        self.maleFilter(answer);
-    };
-
-    self.takeFemales = function (answer) {
-        self.femaleFilter(answer);
-    };
-
-    self.takePets = function (answer) {
-        self.petFilter(answer);
-    };
+    // self.takeMales = function (answer) {
+    //     self.maleFilter(answer);
+    // };
+    //
+    // self.takeFemales = function (answer) {
+    //     self.femaleFilter(answer);
+    // };
+    //
+    // self.takePets = function (answer) {
+    //     self.petFilter(answer);
+    // };
 
     self.reset = function () {
-        self.takeMales();
-        self.takeFemales();
-        self.takePets();
+        // self.takeMales();
+        // self.takeFemales();
+        // self.takePets();
         self.age(null);
     };
 
@@ -217,7 +217,7 @@ var ViewModel = function() {
                 return filtered;
             });
         } else {
-            return genderFilteredShelters()
+            return self.genderFilteredShelters()
         }
     });
 
