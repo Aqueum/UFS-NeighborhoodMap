@@ -22,11 +22,10 @@
 
     <!--filter set, to input age, gender(s) & whether you have a pet-->
     <span>Point me to a hostel for a: </span><br>
-    <input id="age" data-bind="value: age, valueAllowUnset: true"/>
+    <input id="age" title="age" data-bind="value: age, valueAllowUnset: true"/>
     <span>yr old</span>
-    <button data-bind="click: function() { takeMales(true) }">Man</button>
-    <button data-bind="click: function() { takeFemales(true) }">Woman</button>
-    <button data-bind="click: function() { takePets(true) }">+ Pet</button>
+    <select title="gender selector" data-bind="options: genderOptions, value: gender, valueAllowUnset: true"></select>
+    <select title="pet selector" data-bind="options: petOptions, value: pet, valueAllowUnset: true"></select>
     <br>
 
     <!--hostel list-->
@@ -35,11 +34,6 @@
         <li id="clickable"
             data-bind="text: title, click: $parent.showLabel"></li>
     </ul>
-
-    <!--filter reset - to get whole list-->
-    <button class="right" data-bind="click: function() { reset() }">
-        Reset
-    </button>
 
 </aside>
 
