@@ -188,7 +188,7 @@ var ViewModel = function() {
     self.pet = ko.observable('without pets');
 
     self.genderFilteredShelters = ko.computed(function () {
-        if (self.gender === 'Male') {
+        if (self.gender() === 'Male') {
             return ko.utils.arrayFilter(self.shelterlist(), function (hostel) {
                 var filtered = hostel.males === true;
                 if (hostel.marker) {
@@ -196,7 +196,7 @@ var ViewModel = function() {
                 }
                 return filtered;
             });
-        } else if (self.gender === 'Female') {
+        } else if (self.gender() === 'Female') {
             return ko.utils.arrayFilter(self.shelterlist(), function (hostel) {
                 var filtered = hostel.females === true;
                 if (hostel.marker) {
@@ -210,7 +210,7 @@ var ViewModel = function() {
     });
 
     self.filteredShelters = ko.computed(function () {
-        if (self.pet === 'with a pet') {
+        if (self.pet() === 'with a pet') {
             return ko.utils.arrayFilter(self.genderFilteredShelters(), function (hostel) {
                 var filtered = hostel.pets === true;
                 if (hostel.marker) {
