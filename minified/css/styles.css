@@ -1,125 +1,18 @@
-/* Mobile optimisation */
-img, embed, object, video {
-    max-width: 100%;
-}
-
-/* large tap targets */
-nav a, button {
-    min-width: 48px;
-    min-height: 48px;
-}
-
-
-/* Text formatting */
-* {
-    font: 100%/1.2 "Verdana", "Helvetica", "Arial", sans-serif;
-    color: #237;
-}
-
-h1 {
-    font: 100%/1.2 "Verdana", sans-serif;
-    font-size: 3em;
-    margin-bottom: 0;
-    color: #ea3323;
-}
-
-h2 {
-    font-size: 2.25em;
-    color: #67B;
-    margin-bottom: 0.25em;
-}
-
-h3 {
-    font-size: 1.9em;
-    color: #89D;
-    margin-bottom: 0.25em;
-}
-
-h4 {
-    font-size: 1.25em;
-    color: #ABF;
-    margin-bottom: 0.25em;
-}
-
-a {
-    color: #23C;
-}
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-#map {
-    height: 100%;
-}
-
-#clickable, nav a, button {
-    cursor: pointer;
-}
-
-/*
-floating semi-transparrent box
-https://stackoverflow.com/questions/6037712/how-to-float-a-div-over-google-maps
-Filter user for IE8 and earlier
-(https://www.w3schools.com/css/tryit.asp?filename=trycss_transparency)
-*/
-#box {
-    position: absolute;
-    top: 78px;
-    left: 20px;
-    z-index: 98;
-    background-color: #fff7f0;
-    opacity: 0.7;
-    filter: alpha(opacity=70);
-    padding: 5px;
-}
-
-/*
-Title positioned to be marginally overlapping the box
-*/
-#title {
-    position: absolute;
-    top: 0;
-    left: 25px;
-    z-index: 99;
-}
-
-#age {
-    width: 20px;
-}
-
-#shelter-list {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.right {
-    float: right;
-}
-
-/*
-This was designed from the ground up to be a single page app with an interface panel
-small enough to work on most smartphones without modification.
-The following breakpoint is for tiny screens
-*/
-@media (max-width: 300px) {
-    h1 {
-        font-size: 2em;
-    }
-    h2 {
-        font-size: 1.7em;
-    }
-    h1 {
-        font-size: 1.5em;
-    }
-    #box {
-        position: absolute;
-        top: 35px;
-        left: 0;
-        padding: 0;
-    }
-    .hideable {
-        display: none;
-    }
-}
+img,embed,object,video{max-width:100%}
+nav a,button{min-width:48px;min-height:48px}*{font:100%/1.2 "Verdana","Helvetica","Arial",sans-serif;color:#237}
+h1{font:100%/1.2 "Verdana",sans-serif;font-size:3em;margin-bottom:0;color:#ea3323}
+h2{font-size:2.25em;color:#67B;margin-bottom:0.25em}
+h3{font-size:1.9em;color:#89D;margin-bottom:0.25em}
+h4{font-size:1.25em;color:#ABF;margin-bottom:0.25em}
+a{color:#23C}
+html,body{height:100%;margin:0;padding:0}
+#map{height:100%}
+#clickable,nav a,button{cursor:pointer}
+#box{position:absolute;top:78px;left:20px;z-index:98;background-color:#fff7f0;opacity:0.7;filter:alpha(opacity=70);padding:5px}
+#title{position:absolute;top:0;left:25px;z-index:99}
+#age{width:20px}
+#shelter-list{margin-top:10px;margin-bottom:10px}.right{float:right}
+@media(max-width:300px){h1{font-size:2em}
+    h2{font-size:1.7em}
+    h1{font-size:1.5em}
+    #box{position:absolute;top:35px;left:0;padding:0}.hideable{display:none}}
