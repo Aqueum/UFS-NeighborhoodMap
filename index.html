@@ -24,8 +24,8 @@
     <span>Point me to a hostel for a: </span><br>
     <input id="age" title="age" data-bind="value: age, valueAllowUnset: true"/>
     <span>yr old</span>
-    <select title="gender selector" data-bind="options: genderOptions, value: gender"></select>
-    <select title="pet selector" data-bind="options: petOptions, value: pet"></select>
+    <select title="gender selector" data-bind="options: genderOptions, value: gender, valueAllowUnset: true"></select>
+    <select title="pet selector" data-bind="options: petOptions, value: pet, valueAllowUnset: true"></select>
     <br>
 
     <!--hostel list-->
@@ -34,11 +34,6 @@
         <li id="clickable"
             data-bind="text: title, click: $parent.showLabel"></li>
     </ul>
-
-    <!--filter reset - to get whole list-->
-    <button class="right" data-bind="click: function() { reset() }">
-        Reset
-    </button>
 
 </aside>
 
